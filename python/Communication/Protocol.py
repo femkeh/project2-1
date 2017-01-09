@@ -16,6 +16,11 @@ protocol = {
         "response": "ERROR",
         "label": "_"
     },
+    3: {
+        "title": "It's not there yet! You slacker!",
+        "response": "ERROR",
+        "label": "_"
+    },
     # 11-20: Success codes
     11: {
         "title": "Success",
