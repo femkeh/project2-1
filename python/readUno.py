@@ -1,5 +1,6 @@
 import time
 import serial as s
+from Communication.Protocol import *
 
 ser = s.Serial('/dev/tty.usbmodem621', 19200)
 time.sleep(2)
@@ -29,18 +30,14 @@ def read_extraTemp(byteIn):
 tempReads = 0
 tempTotal = 0
 
-for i in range(0, 50):
-    if (read_byte() == 255):
-        print("Lightlevel:", (read_double()))
-    if (read_byte() == 254):
-        print("Temp:", read_temp(read_byte()))
-    # print("byte:", read_byte())
-    # tempTotal += read_byte()
-    # tempReads += 1
-    # print("tempRead: " + str(tempRead))
-    # tempTotal += tempRead
-    # tempReads += 1
-    # tempRead = read_temp(rawDbl)
+# for i in range(0, 50):
+# getTemperature
+ser.write([22])
+byte = read_byte()
+if (byte < 20 and byte > 10):
+    print("received temp:", read_temp(read_byte()))
+else:
+    print("some kind of error:", protocol.get(byte).get('title'))
 # print(read_temp((tempTotal / tempReads)))
     # time.sleep(0.05)
 

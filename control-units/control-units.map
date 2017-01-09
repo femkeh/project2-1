@@ -16,8 +16,14 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
  .text          0x0000000000000000        0x0 AVR_TTC_scheduler.o
  .bss           0x0000000000000000        0x0 AVR_TTC_scheduler.o
+ .text.SCH_Add_Task
+                0x0000000000000000       0x30 AVR_TTC_scheduler.o
  .text          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
+ .text.uart_putDouble
+                0x0000000000000000       0x12 main.o
+ .text.getLight
+                0x0000000000000000        0xa main.o
  COMMON         0x0000000000000000        0x2 main.o
  .text          0x0000000000000000        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
@@ -164,7 +170,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x2c6
+.text           0x0000000000000000      0x2b4
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
                 0x0000000000000000                __vectors
@@ -242,56 +248,52 @@ END GROUP
                 0x000000000000008c                __vector_14
                 0x000000000000008c                __vector_10
                 0x000000000000008c                __vector_16
-                0x000000000000008c                __vector_18
                 0x000000000000008c                __vector_20
                 0x0000000000000090                . = ALIGN (0x2)
  *(.text.*)
- .text.SCH_Add_Task
-                0x0000000000000090       0x30 AVR_TTC_scheduler.o
-                0x0000000000000090                SCH_Add_Task
  .text.SCH_Delete_Task
-                0x00000000000000c0       0x1e AVR_TTC_scheduler.o
-                0x00000000000000c0                SCH_Delete_Task
+                0x0000000000000090       0x1e AVR_TTC_scheduler.o
+                0x0000000000000090                SCH_Delete_Task
  .text.SCH_Dispatch_Tasks
-                0x00000000000000de       0x56 AVR_TTC_scheduler.o
-                0x00000000000000de                SCH_Dispatch_Tasks
+                0x00000000000000ae       0x56 AVR_TTC_scheduler.o
+                0x00000000000000ae                SCH_Dispatch_Tasks
  .text.SCH_Init_T1
-                0x0000000000000134       0x2c AVR_TTC_scheduler.o
-                0x0000000000000134                SCH_Init_T1
+                0x0000000000000104       0x2c AVR_TTC_scheduler.o
+                0x0000000000000104                SCH_Init_T1
  .text.SCH_Start
-                0x0000000000000160        0x4 AVR_TTC_scheduler.o
-                0x0000000000000160                SCH_Start
+                0x0000000000000130        0x4 AVR_TTC_scheduler.o
+                0x0000000000000130                SCH_Start
  .text.__vector_11
-                0x0000000000000164       0x64 AVR_TTC_scheduler.o
-                0x0000000000000164                __vector_11
+                0x0000000000000134       0x64 AVR_TTC_scheduler.o
+                0x0000000000000134                __vector_11
  .text.uart_init
-                0x00000000000001c8       0x1c main.o
-                0x00000000000001c8                uart_init
+                0x0000000000000198       0x1c main.o
+                0x0000000000000198                uart_init
  .text.uart_putByte
-                0x00000000000001e4        0xe main.o
-                0x00000000000001e4                uart_putByte
- .text.uart_putDouble
-                0x00000000000001f2       0x12 main.o
-                0x00000000000001f2                uart_putDouble
+                0x00000000000001b4        0xe main.o
+                0x00000000000001b4                uart_putByte
+ .text.uart_getByte
+                0x00000000000001c2        0xe main.o
+                0x00000000000001c2                uart_getByte
  .text.adc_init
-                0x0000000000000204       0x22 main.o
-                0x0000000000000204                adc_init
+                0x00000000000001d0       0x22 main.o
+                0x00000000000001d0                adc_init
  .text.getAdcValue
-                0x0000000000000226       0x30 main.o
-                0x0000000000000226                getAdcValue
- .text.getLight
-                0x0000000000000256       0x1c main.o
-                0x0000000000000256                getLight
- .text.getTemp  0x0000000000000272       0x18 main.o
-                0x0000000000000272                getTemp
+                0x00000000000001f2       0x30 main.o
+                0x00000000000001f2                getAdcValue
+ .text.getTemp  0x0000000000000222        0xa main.o
+                0x0000000000000222                getTemp
  .text.startup.main
-                0x000000000000028a       0x38 main.o
-                0x000000000000028a                main
-                0x00000000000002c2                . = ALIGN (0x2)
+                0x000000000000022c       0x22 main.o
+                0x000000000000022c                main
+ .text.__vector_18
+                0x000000000000024e       0x62 main.o
+                0x000000000000024e                __vector_18
+                0x00000000000002b0                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000002c2        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
-                0x00000000000002c2                exit
-                0x00000000000002c2                _exit
+ .fini9         0x00000000000002b0        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x00000000000002b0                exit
+                0x00000000000002b0                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -310,11 +312,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000002c2        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000002b0        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000002c6                _etext = .
+                0x00000000000002b4                _etext = .
 
-.data           0x0000000000800100        0x0 load address 0x00000000000002c6
+.data           0x0000000000800100        0x0 load address 0x00000000000002b4
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
@@ -338,8 +340,8 @@ END GROUP
  COMMON         0x0000000000800100       0x23 AVR_TTC_scheduler.o
                 0x0000000000800100                SCH_tasks_G
                 0x0000000000800123                PROVIDE (__bss_end, .)
-                0x00000000000002c6                __data_load_start = LOADADDR (.data)
-                0x00000000000002c6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000000000002b4                __data_load_start = LOADADDR (.data)
+                0x00000000000002b4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800123        0x0
                 0x0000000000800123                PROVIDE (__noinit_start, .)
@@ -367,15 +369,16 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000      0xf9c
+.stab           0x0000000000000000      0xea0
  *(.stab)
- .stab          0x0000000000000000      0x864 AVR_TTC_scheduler.o
- .stab          0x0000000000000864      0x738 main.o
-                                        0x90c (size before relaxing)
+ .stab          0x0000000000000000      0x774 AVR_TTC_scheduler.o
+                                        0x864 (size before relaxing)
+ .stab          0x0000000000000774      0x72c main.o
+                                        0x9a8 (size before relaxing)
 
-.stabstr        0x0000000000000000     0x1005
+.stabstr        0x0000000000000000     0x107a
  *(.stabstr)
- .stabstr       0x0000000000000000     0x1005 AVR_TTC_scheduler.o
+ .stabstr       0x0000000000000000     0x107a AVR_TTC_scheduler.o
 
 .stab.excl
  *(.stab.excl)

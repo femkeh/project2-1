@@ -38,6 +38,11 @@ void uart_putDouble(uint16_t word) {
     uart_putByte(low(word));
 }
 
+char uart_getByte() {
+    loop_until_bit_is_set(UCSR0A, RXC0); /* Wait until data exists. */
+    return UDR0;
+}
+
 void adc_init() {
     ADCSRA |= ((1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0));   // setups up ADC clock prescalar to 128
     ADMUX |= (1<<REFS0);                            // set ref voltage to AVCC
@@ -61,13 +66,12 @@ void getLight() {
     uint16_t light = getAdcValue(0);
     // return light;
     uart_putByte(0xff);
-    uart_putDouble(0x00);
+    uart_putDouble(light);
 }
 
 void getTemp() {
     uint8_t temp = getAdcValue(1);
     // return temp;
-    uart_putByte(0xfe);
     uart_putByte(temp);
 }
 
@@ -77,9 +81,12 @@ int main(void) {
     SCH_Init_T1();
     SCH_Start();
 
+    // Enable the USART Recieve Complete interrupt (USART_RXC)
+    UCSR0B |= (1 << RXCIE0);
+
     // test ADC
-    SCH_Add_Task(getTemp, 0, 50);
-    SCH_Add_Task(getLight, 0, 100);
+    // SCH_Add_Task(getTemp, 0, 50);
+    // SCH_Add_Task(getLight, 0, 100);
 
     sei();
 
@@ -88,4 +95,26 @@ int main(void) {
         // uart_putByte(0x50);
     }
     return 0;
+}
+
+ISR (USART_RX_vect)
+{
+  char receivedByte;
+  receivedByte = uart_getByte(); // Fetch the received byte value into the variable "ByteReceived"
+  uint8_t collectMore = 0;
+
+  switch (receivedByte) {
+        case 21:
+        // getTemperature
+        uart_putByte(12);
+        getTemp();
+        break;
+
+        case 22:
+        // getTempLimit
+        uart_putByte(3);
+        // getTempLimit(); @TODO
+        break;
+
+  }
 }
