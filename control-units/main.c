@@ -61,7 +61,7 @@ void getLight() {
     uint16_t light = getAdcValue(0);
     // return light;
     uart_putByte(0xff);
-    uart_putDouble(light);
+    uart_putDouble(0x00);
 }
 
 void getTemp() {

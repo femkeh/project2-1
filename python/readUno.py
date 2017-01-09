@@ -1,7 +1,7 @@
 import time
 import serial as s
 
-ser = s.Serial('/dev/ttyACM0', 19200)
+ser = s.Serial('/dev/tty.usbmodem621', 19200)
 time.sleep(2)
 
 # read one byte and use ord to make it an int
@@ -15,6 +15,12 @@ def read_double():
     return byte
 
 def read_temp(byteIn):
+    temp = 0.0
+    temp = byteIn * (5000.0/1024)
+    temp = ((temp - 500) / 10)
+    return temp
+
+def read_extraTemp(byteIn):
     temp = 0.0
     temp = byteIn * (5000.0/1024)
     temp = ((temp - 500) / 10)
