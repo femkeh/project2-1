@@ -2,7 +2,7 @@
  * GccApplication6.c
  *
  * Created: 3-11-2016 16:46:41
- *  Author: Simon van der Meer
+ *  Author: 
  */
 #define F_CPU 16000000UL
 #define BAUD 19200
@@ -17,6 +17,17 @@
 
 #define low(x)   ((x) & 0xFF)
 #define high(x)   (((x)>>8) & 0xFF)
+
+// Global variables
+uint8_t _temperatureLimit = 169;
+
+uint16_t _lightLimit = 300;
+
+uint8_t _maxDownLimit = 200;
+
+uint8_t _minDownLimit = 5;
+
+uint8_t _state = 0; //ROLLED_DOWN
 
 int adc_value;        // Variable used to store the value read from the ADC converter
 
@@ -62,18 +73,54 @@ uint16_t getAdcValue(uint8_t channel) {
             return ADCW;                                   // 8 bit reading, ADLAR set
 }
 
-void getLight() {
-    uint16_t light = getAdcValue(0);
-    // return light;
-    uart_putByte(0xff);
-    uart_putDouble(light);
-}
-
+//----Get functions----\\
 void getTemp() {
     uint8_t temp = getAdcValue(1);
     // return temp;
     uart_putByte(temp);
 }
+
+void getTempLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // return tempLimit; 
+    uart_putByte(_temperatureLimit);
+}
+
+void getLight() {
+    uint16_t light = getAdcValue(0);
+    // return light;
+    //uart_putByte(0xff); // MOET DIT?
+    uart_putDouble(light);
+}
+
+void getLightLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // return tempLimit; 
+    //uart_putByte(0xff); // MOET DIT?
+    uart_putDouble(_lightLimit);
+}
+
+void getMaxDownLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // return tempLimit; 
+    uart_putByte(_maxDownLimit);
+}
+
+void getMinDownLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // return tempLimit; 
+    uart_putByte(_minDownLimit);
+}
+
+void getCurrentState() {
+    //uint8_t temp = getAdcValue(1);
+    // return tempLimit; 
+    uart_putByte(_state);
+}
+
+//----Set functions----\\
+
+
 
 int main(void) {
 	uart_init();
@@ -103,6 +150,7 @@ ISR (USART_RX_vect)
   receivedByte = uart_getByte(); // Fetch the received byte value into the variable "ByteReceived"
   uint8_t collectMore = 0;
 
+
   switch (receivedByte) {
         case 21:
         // getTemperature
@@ -112,9 +160,41 @@ ISR (USART_RX_vect)
 
         case 22:
         // getTempLimit
-        uart_putByte(3);
-        // getTempLimit(); @TODO
+        uart_putByte(12);
+        getTempLimit(); 
         break;
+
+        case 23:
+        // getLight
+        uart_putByte(13); // MOET DIT GEHARDCODE BLIJVEN?
+        getLight();
+        break;
+
+        case 24:
+        // getLightLimit
+        uart_putByte(13);
+        getLightLimit(); 
+        break;
+
+        case 25:
+        // getMaxDownLimit
+        uart_putByte(12);
+        getMaxDownLimit();
+        break;
+
+        case 26:
+        // getMinDownLimit
+        uart_putByte(12);
+        getMinDownLimit(); 
+        break;
+
+        case 27:
+        // getCurrentState
+        uart_putByte(12);
+        getCurrentState(); 
+        break;
+
+        // 41-46
 
   }
 }

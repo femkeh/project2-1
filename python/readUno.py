@@ -21,23 +21,18 @@ def read_temp(byteIn):
     temp = ((temp - 500) / 10)
     return temp
 
-def read_extraTemp(byteIn):
-    temp = 0.0
-    temp = byteIn * (5000.0/1024)
-    temp = ((temp - 500) / 10)
-    return temp
-
 tempReads = 0
 tempTotal = 0
 
 # for i in range(0, 50):
 # getTemperature
-ser.write([22])
+# Met light: 23, 24, gebruik read_double
+ser.write([27])
 byte = read_byte()
 if (byte < 20 and byte > 10):
-    print("received temp:", read_temp(read_byte()))
+    print("received current state:", read_byte()) # read_temp(read_byte())
 else:
-    print("some kind of error:", protocol.get(byte).get('title'))
+    print("some kind of error:", protocol.get(byte).title) #.get('title'))
 # print(read_temp((tempTotal / tempReads)))
     # time.sleep(0.05)
 
