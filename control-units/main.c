@@ -4,6 +4,10 @@
  * Created: 3-11-2016 16:46:41
  *  Author: 
  */
+
+ // Set light limit doet et niet, moet tussen de 0 - 255 zijn, maar is niet reeel. Hoe kan dat groter?
+ // + alle limits worden niet opgeslagen, als connectie weg is, is de change ook weg. 
+
 #define F_CPU 16000000UL
 #define BAUD 19200
 
@@ -18,8 +22,8 @@
 #define low(x)   ((x) & 0xFF)
 #define high(x)   (((x)>>8) & 0xFF)
 
-// Global variables
-uint8_t _temperatureLimit = 169;
+// Global variables, maar gehardcode dus als setters gebruikt worden dan is dat alleen in zelfde connectie, wordt niet opgeslagen
+uint8_t _tempLimit = 169;
 
 uint16_t _lightLimit = 300;
 
@@ -73,7 +77,7 @@ uint16_t getAdcValue(uint8_t channel) {
             return ADCW;                                   // 8 bit reading, ADLAR set
 }
 
-//----Get functions----\\
+//----Get functions----
 void getTemp() {
     uint8_t temp = getAdcValue(1);
     // return temp;
@@ -83,7 +87,7 @@ void getTemp() {
 void getTempLimit() {
     //uint8_t temp = getAdcValue(1);
     // return tempLimit; 
-    uart_putByte(_temperatureLimit);
+    uart_putByte(_tempLimit);
 }
 
 void getLight() {
@@ -118,7 +122,59 @@ void getCurrentState() {
     uart_putByte(_state);
 }
 
-//----Set functions----\\
+//----Set functions----
+void setTempLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // set tempLimit; 
+    _tempLimit = uart_getByte();
+      if (_tempLimit <= 0) {
+        uart_putByte(2);
+      } else {
+        uart_putByte(12);
+      }
+}
+
+void setLightLimit() {
+    // set light limit
+    uint8_t msb = uart_getByte();
+    _lightLimit = (msb << 8)|uart_getByte();
+    uart_putByte(12);
+}
+
+void setMaxDownLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // set max roll down Limit; 
+    _maxDownLimit = uart_getByte();
+      if (_maxDownLimit <= 0) {
+        uart_putByte(2);
+      } else {
+        uart_putByte(12);
+      }
+}
+
+void setMinDownLimit() {
+    //uint8_t temp = getAdcValue(1);
+    // set max roll down Limit; 
+    _minDownLimit = uart_getByte();
+      if (_minDownLimit <= 0) {
+        uart_putByte(2);
+      } else {
+        uart_putByte(12);
+      }
+}
+
+void setStateRollDown() {
+    //uint8_t temp = getAdcValue(1);
+    // set max roll down Limit; 
+    _state = 0;
+}
+
+void setStateRollUp() {
+    //uint8_t temp = getAdcValue(1);
+    // set max roll down Limit; 
+    _state = 1;
+}
+
 
 
 
@@ -195,6 +251,43 @@ ISR (USART_RX_vect)
         break;
 
         // 41-46
+        case 41:
+        // setTempLimit
+        //uart_putByte(12);
+        setTempLimit(); 
+        break;
+
+        case 42:
+        // setLightLimit
+        //uart_putByte(12);
+        setLightLimit(); 
+        break;
+
+        case 43:
+        // setMaxDownLimit
+        //uart_putByte(12);
+        setMaxDownLimit(); 
+        break;
+
+        case 44:
+        // setMinDownLimit
+        //uart_putByte(12);
+        setMinDownLimit(); 
+        break;
+
+        case 45:
+        // set state roll down
+        //uart_putByte(12);
+        setStateRollDown(); 
+        uart_putByte(12);
+        break;
+
+        case 46:
+        // set state roll down
+        //uart_putByte(12);
+        setStateRollUp(); 
+        uart_putByte(12);
+        break;
 
   }
 }
