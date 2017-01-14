@@ -105,5 +105,20 @@ protocol = {
         "title": "Set state roll up",
         "label": "setStateRollUp",
         "sendMoreData": 0
+    },
+    47: {
+        "title": "Set mode to manual",
+        "label": "setModeToManual",
+        "sendMoreData": 0
+    },
+    48: {
+        "title": "Set manual to mode",
+        "label": "setManualToMode",
+        "sendMoreData": 0
+    },
+    50: {
+        "title": "Roll screen up/down",
+        "label": "setScreenUp",
+        "sendMoreData": 0
     }
 }

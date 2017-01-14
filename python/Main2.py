@@ -1,24 +1,16 @@
 from tkinter import *
 from Element import *
 from Communication.Protocol import *
+from ControlUnit import *
 import serial
 import time
 
-print(protocol)
-
 # ser = serial.Serial('/dev/ttyACM0', 19200)
 # time.sleep(2)
-#
-# def read_byte():
-# 	return ord(ser.read(1))
-#
-# for i in range(0, 500):
-# 	print(read_byte())
-#
-# ser.close()
 
 # Main
 window = Tk()
+window.wm_title("Rolluiksysteem                                                                                                                             Yumthy ©")
 rootcanvas = Canvas(window, borderwidth=0, width=1000, height=450)
 rootframe = Frame(rootcanvas, background="#ffffff")
 verticalScrollbar = Scrollbar(window, orient="vertical", command=rootcanvas.yview)
@@ -35,21 +27,23 @@ connectValue =''
 def insertModule():
 	if len(connectEntry.get()) > 0:
 		connectValue = connectEntry.get()
-		print(connectValue)
-		# @TODO: serial reading ofzoiets
+		ser = serial.Serial(connectValue, 19200)
+		time.sleep(2)
+		unit = ControlUnit(ser, protocol)
 		s = 1
-		element = Element(rootframe, '#1', ser, s)
+		number = str(len(elementen) + 1)
+		name = '#%s'% number
+		element = Element(rootframe, name, unit, s)
 		elementen.append(element)
-
 
 buttonConnection = Button(rootcanvas, text = "Connect", state=NORMAL, command = insertModule) #Nog iets met dat die geselecteerd is, 'aan' staat
 buttonConnection.configure(width = 10) # activebackground = "#33B5E5",
-buttonConnection_window = rootcanvas.create_window(265, 12, window=buttonConnection) # anchor=NW,
+buttonConnection_window = rootcanvas.create_window(720, 12, window=buttonConnection) # anchor=NW,
 connectEntry = Entry(rootcanvas, width=7) #textvariable=self.light_limit
-connectEntry_window = rootcanvas.create_window(195, 12, window=connectEntry)
+connectEntry_window = rootcanvas.create_window(650, 12, window=connectEntry)
 connectEntry.insert(10, "COM..")
 
-print(elementen)
+#print(elementen) 195 265
 
 
-# window.mainloop()
+window.mainloop()

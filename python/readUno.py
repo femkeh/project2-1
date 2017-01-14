@@ -27,17 +27,18 @@ tempTotal = 0
 # for i in range(0, 50):
 # getTemperature
 # Met light: 23, 24, gebruik read_double
-ser.write([41])
-ser.write([169])
+ser.write([42])
+ser.write([1])
+ser.write([54])
 byte = read_byte()
 if (byte < 20 and byte > 10):
     print("Light limit is set") # print("Temp limit set on:", read_byte())   read_temp(read_byte())
 else:
     print("some kind of error:", protocol.get(byte).title) #.get('title'))
-ser.write([22])
+ser.write([24])
 byte = read_byte()
 if (byte < 20 and byte > 10):
-    print("Temp limit is set on:", read_byte()) # print("Temp limit set on:", read_byte())   read_temp(read_byte())
+    print("Light limit is set on:", read_double()) # print("Temp limit set on:", read_byte())   read_temp(read_byte())
 else:
     print("some kind of error:", protocol.get(byte).title) #.get('title'))
 # print(read_temp((tempTotal / tempReads)))

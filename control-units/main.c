@@ -6,7 +6,6 @@
  */
 
  // Set light limit doet et niet, moet tussen de 0 - 255 zijn, maar is niet reeel. Hoe kan dat groter?
- // + alle limits worden niet opgeslagen, als connectie weg is, is de change ook weg. 
 
 #define F_CPU 16000000UL
 #define BAUD 19200
@@ -23,13 +22,15 @@
 #define high(x)   (((x)>>8) & 0xFF)
 
 // Global variables, maar gehardcode dus als setters gebruikt worden dan is dat alleen in zelfde connectie, wordt niet opgeslagen
-uint8_t _tempLimit = 169;
+uint8_t _tempLimit = 174;
 
 uint16_t _lightLimit = 300;
 
-uint8_t _maxDownLimit = 200;
+uint8_t _maxDownLimit = 100;
 
 uint8_t _minDownLimit = 5;
+
+uint8_t _currentMode = 0; // not manual
 
 uint8_t _state = 0; //ROLLED_DOWN
 
@@ -64,6 +65,11 @@ void adc_init() {
     ADCSRA |= (1<<ADEN);                            // ADC Enable
 
     ADCSRA |= (1<<ADSC);                            // start sampling                       // start sampling
+}
+
+void init_ports() {
+    DDRD = 0xff; // set port D as output
+    PORTD = 0x00; // LEDs off
 }
 
 uint16_t getAdcValue(uint8_t channel) {
@@ -175,12 +181,59 @@ void setStateRollUp() {
     _state = 1;
 }
 
+void setModeToManual() {
+    //uint8_t temp = getAdcValue(1);
+    // set max roll down Limit; 
+    _currentMode = 1;
+}
+
+void setManualToMode() {
+    //uint8_t temp = getAdcValue(1);
+    // set max roll down Limit; 
+    _currentMode = 0;
+}
+
+void blinkYellowLed() {
+    uint8_t max = _maxDownLimit;
+    while (max > 0) {
+        PORTD |= _BV(PORTD4);// PORTD=0x0f; // LEDs on
+        // delay 0.5 sec
+        _delay_ms(500);
+        PORTD=0x00; // led off
+        // delay 0.5 sec
+        _delay_ms(500);
+        max = max - 10; // remove 10 cms
+    }
+    if (_state == 0) {
+        _state = 1;
+    } 
+    else {
+        _state = 0;
+    }
+}
+
+void redLightOn() {
+    PORTD |= _BV(PORTD2);
+}
+
+void redLightOff() {
+    PORTD=0x00;  // is alle poorten D uit..
+}
+
+void greenLightOn() {
+    PORTD |= _BV(PORTD3);
+}
+
+void greenLightOff() {
+    PORTD=0x00;  // is alle poorten D uit..
+}
 
 
 
 int main(void) {
 	uart_init();
     adc_init();
+    init_ports();
     SCH_Init_T1();
     SCH_Start();
 
@@ -257,10 +310,9 @@ ISR (USART_RX_vect)
         setTempLimit(); 
         break;
 
-        case 42:
-        // setLightLimit
-        //uart_putByte(12);
-        setLightLimit(); 
+        case 42: ;
+        // set light limit
+        setLightLimit();
         break;
 
         case 43:
@@ -287,6 +339,27 @@ ISR (USART_RX_vect)
         //uart_putByte(12);
         setStateRollUp(); 
         uart_putByte(12);
+        break;
+
+        case 47:
+        setModeToManual(); 
+        uart_putByte(12);
+        break;
+
+        case 48:
+        setManualToMode(); 
+        uart_putByte(12);
+        break;
+
+        case 50:
+        redLightOff();
+        blinkYellowLed(); 
+        if (_state == 0) {
+            greenLightOn();
+        }
+        else {
+            redLightOn();
+        }
         break;
 
   }
