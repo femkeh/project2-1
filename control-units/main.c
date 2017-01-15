@@ -32,7 +32,7 @@ uint8_t _minDownLimit = 5;
 
 uint8_t _currentMode = 0; // not manual
 
-uint8_t _state = 0; //ROLLED_DOWN
+uint8_t _state = 1; //ROLLED_UP = 1, ROLLED_DOWN = 0
 
 int adc_value;        // Variable used to store the value read from the ADC converter
 
@@ -91,46 +91,32 @@ void getTemp() {
 }
 
 void getTempLimit() {
-    //uint8_t temp = getAdcValue(1);
-    // return tempLimit; 
     uart_putByte(_tempLimit);
 }
 
 void getLight() {
     uint16_t light = getAdcValue(0);
-    // return light;
-    //uart_putByte(0xff); // MOET DIT?
     uart_putDouble(light);
 }
 
 void getLightLimit() {
-    //uint8_t temp = getAdcValue(1);
-    // return tempLimit; 
-    //uart_putByte(0xff); // MOET DIT?
     uart_putDouble(_lightLimit);
 }
 
 void getMaxDownLimit() {
-    //uint8_t temp = getAdcValue(1);
-    // return tempLimit; 
     uart_putByte(_maxDownLimit);
 }
 
 void getMinDownLimit() {
-    //uint8_t temp = getAdcValue(1);
-    // return tempLimit; 
     uart_putByte(_minDownLimit);
 }
 
 void getCurrentState() {
-    //uint8_t temp = getAdcValue(1);
-    // return tempLimit; 
     uart_putByte(_state);
 }
 
 //----Set functions----
 void setTempLimit() {
-    //uint8_t temp = getAdcValue(1);
     // set tempLimit; 
     _tempLimit = uart_getByte();
       if (_tempLimit <= 0) {
@@ -148,8 +134,6 @@ void setLightLimit() {
 }
 
 void setMaxDownLimit() {
-    //uint8_t temp = getAdcValue(1);
-    // set max roll down Limit; 
     _maxDownLimit = uart_getByte();
       if (_maxDownLimit <= 0) {
         uart_putByte(2);
@@ -159,8 +143,6 @@ void setMaxDownLimit() {
 }
 
 void setMinDownLimit() {
-    //uint8_t temp = getAdcValue(1);
-    // set max roll down Limit; 
     _minDownLimit = uart_getByte();
       if (_minDownLimit <= 0) {
         uart_putByte(2);
@@ -170,31 +152,24 @@ void setMinDownLimit() {
 }
 
 void setStateRollDown() {
-    //uint8_t temp = getAdcValue(1);
-    // set max roll down Limit; 
     _state = 0;
 }
 
 void setStateRollUp() {
-    //uint8_t temp = getAdcValue(1);
-    // set max roll down Limit; 
     _state = 1;
 }
 
 void setModeToManual() {
-    //uint8_t temp = getAdcValue(1);
-    // set max roll down Limit; 
     _currentMode = 1;
 }
 
 void setManualToMode() {
-    //uint8_t temp = getAdcValue(1);
-    // set max roll down Limit; 
     _currentMode = 0;
 }
 
 void blinkYellowLed() {
     uint8_t max = _maxDownLimit;
+    redLightOff();
     while (max > 0) {
         PORTD |= _BV(PORTD4);// PORTD=0x0f; // LEDs on
         // delay 0.5 sec
@@ -206,9 +181,11 @@ void blinkYellowLed() {
     }
     if (_state == 0) {
         _state = 1;
+        redLightOn();
     } 
     else {
         _state = 0;
+        greenLightOn();
     }
 }
 
@@ -228,6 +205,18 @@ void greenLightOff() {
     PORTD=0x00;  // is alle poorten D uit..
 }
 
+void checkTempLimit() {
+    if (getAdcValue(1) >= _tempLimit && _state == 1) {
+        blinkYellowLed();
+    }
+}
+
+void checkLightLimit() {
+    if (getAdcValue(0) >= _lightLimit && _state == 1) {
+        blinkYellowLed();
+    }
+}
+
 
 
 int main(void) {
@@ -236,6 +225,12 @@ int main(void) {
     init_ports();
     SCH_Init_T1();
     SCH_Start();
+    if (_state == 1) {
+        redLightOn();
+    }
+    else {
+        greenLightOn();
+    }
 
     // Enable the USART Recieve Complete interrupt (USART_RXC)
     UCSR0B |= (1 << RXCIE0);
@@ -243,6 +238,8 @@ int main(void) {
     // test ADC
     // SCH_Add_Task(getTemp, 0, 50);
     // SCH_Add_Task(getLight, 0, 100);
+    SCH_Add_Task(checkTempLimit, 0, 10);
+    SCH_Add_Task(checkLightLimit, 0, 10);
 
     sei();
 
@@ -306,7 +303,6 @@ ISR (USART_RX_vect)
         // 41-46
         case 41:
         // setTempLimit
-        //uart_putByte(12);
         setTempLimit(); 
         break;
 
@@ -317,27 +313,27 @@ ISR (USART_RX_vect)
 
         case 43:
         // setMaxDownLimit
-        //uart_putByte(12);
         setMaxDownLimit(); 
         break;
 
         case 44:
         // setMinDownLimit
-        //uart_putByte(12);
         setMinDownLimit(); 
         break;
 
         case 45:
         // set state roll down
-        //uart_putByte(12);
         setStateRollDown(); 
+        redLightOff();
+        greenLightOn();
         uart_putByte(12);
         break;
 
         case 46:
         // set state roll down
-        //uart_putByte(12);
         setStateRollUp(); 
+        redLightOff();
+        redLightOn();
         uart_putByte(12);
         break;
 
@@ -352,14 +348,7 @@ ISR (USART_RX_vect)
         break;
 
         case 50:
-        redLightOff();
         blinkYellowLed(); 
-        if (_state == 0) {
-            greenLightOn();
-        }
-        else {
-            redLightOn();
-        }
         break;
 
   }

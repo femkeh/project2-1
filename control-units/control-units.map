@@ -22,8 +22,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 AVR_TTC_scheduler.o
  .data          0x0000000000000000        0x0 AVR_TTC_scheduler.o
  .bss           0x0000000000000000        0x0 AVR_TTC_scheduler.o
- .text.SCH_Add_Task
-                0x0000000000000000       0x30 AVR_TTC_scheduler.o
  .text          0x0000000000000000        0x0 main.o
  .data          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
@@ -218,7 +216,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x4c2
+.text           0x0000000000000000      0x564
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
                 0x0000000000000000                __vectors
@@ -301,96 +299,105 @@ END GROUP
                 0x00000000000000a2                __vector_22
                 0x00000000000000a6                . = ALIGN (0x2)
  *(.text.*)
+ .text.SCH_Add_Task
+                0x00000000000000a6       0x30 AVR_TTC_scheduler.o
+                0x00000000000000a6                SCH_Add_Task
  .text.SCH_Delete_Task
-                0x00000000000000a6       0x1e AVR_TTC_scheduler.o
-                0x00000000000000a6                SCH_Delete_Task
+                0x00000000000000d6       0x1e AVR_TTC_scheduler.o
+                0x00000000000000d6                SCH_Delete_Task
  .text.SCH_Dispatch_Tasks
-                0x00000000000000c4       0x56 AVR_TTC_scheduler.o
-                0x00000000000000c4                SCH_Dispatch_Tasks
+                0x00000000000000f4       0x56 AVR_TTC_scheduler.o
+                0x00000000000000f4                SCH_Dispatch_Tasks
  .text.SCH_Init_T1
-                0x000000000000011a       0x2c AVR_TTC_scheduler.o
-                0x000000000000011a                SCH_Init_T1
+                0x000000000000014a       0x2c AVR_TTC_scheduler.o
+                0x000000000000014a                SCH_Init_T1
  .text.SCH_Start
-                0x0000000000000146        0x4 AVR_TTC_scheduler.o
-                0x0000000000000146                SCH_Start
+                0x0000000000000176        0x4 AVR_TTC_scheduler.o
+                0x0000000000000176                SCH_Start
  .text.__vector_11
-                0x000000000000014a       0x64 AVR_TTC_scheduler.o
-                0x000000000000014a                __vector_11
+                0x000000000000017a       0x64 AVR_TTC_scheduler.o
+                0x000000000000017a                __vector_11
  .text.uart_init
-                0x00000000000001ae       0x1c main.o
-                0x00000000000001ae                uart_init
+                0x00000000000001de       0x1c main.o
+                0x00000000000001de                uart_init
  .text.uart_putByte
-                0x00000000000001ca        0xe main.o
-                0x00000000000001ca                uart_putByte
+                0x00000000000001fa        0xe main.o
+                0x00000000000001fa                uart_putByte
  .text.uart_putDouble
-                0x00000000000001d8       0x12 main.o
-                0x00000000000001d8                uart_putDouble
+                0x0000000000000208       0x12 main.o
+                0x0000000000000208                uart_putDouble
  .text.uart_getByte
-                0x00000000000001ea        0xe main.o
-                0x00000000000001ea                uart_getByte
+                0x000000000000021a        0xe main.o
+                0x000000000000021a                uart_getByte
  .text.adc_init
-                0x00000000000001f8       0x22 main.o
-                0x00000000000001f8                adc_init
+                0x0000000000000228       0x22 main.o
+                0x0000000000000228                adc_init
  .text.init_ports
-                0x000000000000021a        0x8 main.o
-                0x000000000000021a                init_ports
+                0x000000000000024a        0x8 main.o
+                0x000000000000024a                init_ports
  .text.getAdcValue
-                0x0000000000000222       0x30 main.o
-                0x0000000000000222                getAdcValue
- .text.getTemp  0x0000000000000252        0xa main.o
-                0x0000000000000252                getTemp
+                0x0000000000000252       0x30 main.o
+                0x0000000000000252                getAdcValue
+ .text.getTemp  0x0000000000000282        0xa main.o
+                0x0000000000000282                getTemp
  .text.getTempLimit
-                0x000000000000025c        0x8 main.o
-                0x000000000000025c                getTempLimit
+                0x000000000000028c        0x8 main.o
+                0x000000000000028c                getTempLimit
  .text.getLight
-                0x0000000000000264        0xa main.o
-                0x0000000000000264                getLight
+                0x0000000000000294        0xa main.o
+                0x0000000000000294                getLight
  .text.getLightLimit
-                0x000000000000026e        0xc main.o
-                0x000000000000026e                getLightLimit
+                0x000000000000029e        0xc main.o
+                0x000000000000029e                getLightLimit
  .text.getMaxDownLimit
-                0x000000000000027a        0x8 main.o
-                0x000000000000027a                getMaxDownLimit
+                0x00000000000002aa        0x8 main.o
+                0x00000000000002aa                getMaxDownLimit
  .text.getMinDownLimit
-                0x0000000000000282        0x8 main.o
-                0x0000000000000282                getMinDownLimit
+                0x00000000000002b2        0x8 main.o
+                0x00000000000002b2                getMinDownLimit
  .text.getCurrentState
-                0x000000000000028a        0x8 main.o
-                0x000000000000028a                getCurrentState
+                0x00000000000002ba        0x8 main.o
+                0x00000000000002ba                getCurrentState
  .text.setTempLimit
-                0x0000000000000292       0x16 main.o
-                0x0000000000000292                setTempLimit
+                0x00000000000002c2       0x16 main.o
+                0x00000000000002c2                setTempLimit
  .text.setLightLimit
-                0x00000000000002a8       0x26 main.o
-                0x00000000000002a8                setLightLimit
+                0x00000000000002d8       0x26 main.o
+                0x00000000000002d8                setLightLimit
  .text.setMaxDownLimit
-                0x00000000000002ce       0x16 main.o
-                0x00000000000002ce                setMaxDownLimit
+                0x00000000000002fe       0x16 main.o
+                0x00000000000002fe                setMaxDownLimit
  .text.setMinDownLimit
-                0x00000000000002e4       0x16 main.o
-                0x00000000000002e4                setMinDownLimit
- .text.blinkYellowLed
-                0x00000000000002fa       0x4a main.o
-                0x00000000000002fa                blinkYellowLed
+                0x0000000000000314       0x16 main.o
+                0x0000000000000314                setMinDownLimit
  .text.redLightOn
-                0x0000000000000344        0x4 main.o
-                0x0000000000000344                redLightOn
+                0x000000000000032a        0x4 main.o
+                0x000000000000032a                redLightOn
  .text.greenLightOn
-                0x0000000000000348        0x4 main.o
-                0x0000000000000348                greenLightOn
+                0x000000000000032e        0x4 main.o
+                0x000000000000032e                greenLightOn
+ .text.blinkYellowLed
+                0x0000000000000332       0x50 main.o
+                0x0000000000000332                blinkYellowLed
+ .text.checkLightLimit
+                0x0000000000000382       0x22 main.o
+                0x0000000000000382                checkLightLimit
+ .text.checkTempLimit
+                0x00000000000003a4       0x20 main.o
+                0x00000000000003a4                checkTempLimit
  .text.startup.main
-                0x000000000000034c       0x26 main.o
-                0x000000000000034c                main
+                0x00000000000003c4       0x58 main.o
+                0x00000000000003c4                main
  .text.__vector_18
-                0x0000000000000372      0x140 main.o
-                0x0000000000000372                __vector_18
- .text.libgcc   0x00000000000004b2        0xc /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
-                0x00000000000004b2                __tablejump2__
-                0x00000000000004be                . = ALIGN (0x2)
+                0x000000000000041c      0x138 main.o
+                0x000000000000041c                __vector_18
+ .text.libgcc   0x0000000000000554        0xc /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+                0x0000000000000554                __tablejump2__
+                0x0000000000000560                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000004be        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
-                0x00000000000004be                exit
-                0x00000000000004be                _exit
+ .fini9         0x0000000000000560        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000560                exit
+                0x0000000000000560                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -409,56 +416,55 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000004be        0x4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x0000000000000560        0x4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000004c2                _etext = .
+                0x0000000000000564                _etext = .
 
-.data           0x0000000000800100        0x6 load address 0x00000000000004c2
+.data           0x0000000000800100        0x6 load address 0x0000000000000564
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data._state   0x0000000000800100        0x1 main.o
+                0x0000000000800100                _state
  .data._minDownLimit
-                0x0000000000800100        0x1 main.o
-                0x0000000000800100                _minDownLimit
- .data._maxDownLimit
                 0x0000000000800101        0x1 main.o
-                0x0000000000800101                _maxDownLimit
+                0x0000000000800101                _minDownLimit
+ .data._maxDownLimit
+                0x0000000000800102        0x1 main.o
+                0x0000000000800102                _maxDownLimit
  .data._lightLimit
-                0x0000000000800102        0x2 main.o
-                0x0000000000800102                _lightLimit
+                0x0000000000800103        0x2 main.o
+                0x0000000000800103                _lightLimit
  .data._tempLimit
-                0x0000000000800104        0x1 main.o
-                0x0000000000800104                _tempLimit
+                0x0000000000800105        0x1 main.o
+                0x0000000000800105                _tempLimit
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
                 0x0000000000800106                . = ALIGN (0x2)
- *fill*         0x0000000000800105        0x1 
                 0x0000000000800106                _edata = .
                 0x0000000000800106                PROVIDE (__data_end, .)
 
-.bss            0x0000000000800106       0x25
+.bss            0x0000000000800106       0x24
                 0x0000000000800106                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss._state    0x0000000000800106        0x1 main.o
-                0x0000000000800106                _state
  .bss._currentMode
-                0x0000000000800107        0x1 main.o
-                0x0000000000800107                _currentMode
+                0x0000000000800106        0x1 main.o
+                0x0000000000800106                _currentMode
  *(COMMON)
- COMMON         0x0000000000800108       0x23 AVR_TTC_scheduler.o
-                0x0000000000800108                SCH_tasks_G
-                0x000000000080012b                PROVIDE (__bss_end, .)
-                0x00000000000004c2                __data_load_start = LOADADDR (.data)
-                0x00000000000004c8                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0000000000800107       0x23 AVR_TTC_scheduler.o
+                0x0000000000800107                SCH_tasks_G
+                0x000000000080012a                PROVIDE (__bss_end, .)
+                0x0000000000000564                __data_load_start = LOADADDR (.data)
+                0x000000000000056a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x000000000080012b        0x0
-                0x000000000080012b                PROVIDE (__noinit_start, .)
+.noinit         0x000000000080012a        0x0
+                0x000000000080012a                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x000000000080012b                PROVIDE (__noinit_end, .)
-                0x000000000080012b                _end = .
-                0x000000000080012b                PROVIDE (__heap_start, .)
+                0x000000000080012a                PROVIDE (__noinit_end, .)
+                0x000000000080012a                _end = .
+                0x000000000080012a                PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)
@@ -476,24 +482,23 @@ END GROUP
 .signature
  *(.signature*)
 
-.stab           0x0000000000000000     0x1b48
+.stab           0x0000000000000000     0x1d4c
  *(.stab)
- .stab          0x0000000000000000      0x774 AVR_TTC_scheduler.o
-                                        0x864 (size before relaxing)
- .stab          0x0000000000000774     0x1140 main.o
-                                       0x1278 (size before relaxing)
- .stab          0x00000000000018b4       0x6c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .stab          0x0000000000000000      0x864 AVR_TTC_scheduler.o
+ .stab          0x0000000000000864     0x1254 main.o
+                                       0x138c (size before relaxing)
+ .stab          0x0000000000001ab8       0x6c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
                                          0x78 (size before relaxing)
- .stab          0x0000000000001920       0x9c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .stab          0x0000000000001b24       0x9c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
                                          0xa8 (size before relaxing)
- .stab          0x00000000000019bc       0xd8 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .stab          0x0000000000001bc0       0xd8 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
                                          0xe4 (size before relaxing)
- .stab          0x0000000000001a94       0xb4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .stab          0x0000000000001c98       0xb4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
                                          0xc0 (size before relaxing)
 
-.stabstr        0x0000000000000000     0x1dc9
+.stabstr        0x0000000000000000     0x1df8
  *(.stabstr)
- .stabstr       0x0000000000000000     0x1dc9 AVR_TTC_scheduler.o
+ .stabstr       0x0000000000000000     0x1df8 AVR_TTC_scheduler.o
 
 .stab.excl
  *(.stab.excl)
