@@ -1,4 +1,5 @@
 import serial
+import time
 
 class ControlUnit:
 	def __init__(self, ser, protocol):
@@ -41,6 +42,17 @@ class ControlUnit:
 			return False
 
 		data = self.read_temp(self.read_byte())
+
+		return data
+
+	def getLight(self):
+		self.ser.write([23])
+
+		responseId = self.read_byte()
+		if (responseId < 11 or responseId > 20):
+			return False
+
+		data = self.read_double()
 
 		return data
 

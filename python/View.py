@@ -1,8 +1,12 @@
 from tkinter import *
+from PlotTemp import *
+from PlotLight import *
+import time
 
 class View():
-	def __init__(self, canvas):
+	def __init__(self, canvas, unit):
 		self.canvas = canvas
+		self.unit = unit
 		
 		###--- drawGraph ---###
 
@@ -13,10 +17,10 @@ class View():
 
 		# x-axis
 		for i in range(7):
-			x = 450 + (i * 80) #offset vanaf linker scherm rand = 50 + voor elke stap ix100 verderop een lijn
+			x = 450 + (i * 80) #offset vanaf linker scherm rand = 450 + voor elke stap ix80 verderop een lijn
 			self.canvas.create_line(x,300,x,50, width=1, dash=(2,5)) 
 			self.canvas.create_text(x,300, text='%d'% (10*(i-6)), anchor=N) 
-		self.canvas.create_text(x-50,320, text='Time in minutes', font = "Helvetica 16 bold", anchor=N) 
+		self.canvas.create_text(x-50,320, text='Time in seconds', font = "Helvetica 16 bold", anchor=N) 
 
 		# y-axis lux
 		for i in range(6):
@@ -25,11 +29,39 @@ class View():
 			if (i == 0):
 				self.canvas.create_text(440,y, text='0', anchor=E)
 			else: 
-				self.canvas.create_text(440,y, text='%d.000'% (20*i), anchor=E)
-		self.canvas.create_text(440,35, text='Lux', font = "Helvetica 16 bold", anchor=E)
+				self.canvas.create_text(440,y, text='%d00'% (i*2), anchor=E)
+		self.canvas.create_text(440,35, text='Lux', font = "Helvetica 16 bold", anchor=E, fill='red')
 
 		# y-axis temp (-40, 60)
 		for i in range(6):
 			y = 300 - (i * 50) #offset vanaf linker scherm rand = 50 + voor elke stap ix100 verderop een lijn
 			self.canvas.create_text(960,y, text='%d'% (20*(i-2)), anchor=E)
-		self.canvas.create_text(990,35, text='Degrees Celsius', font = "Helvetica 16 bold", anchor=E)
+		self.canvas.create_text(990,35, text='Degrees Celsius', font = "Helvetica 16 bold", anchor=E, fill='blue')
+
+
+		###---- drawLinesInGraph ----####
+		# hij rekent em eerst helemaal uit voordat ie et neerzet.. et is geen live verbinding..
+		# value = 5
+		# extra = 0
+		# while value > 0:
+		# 	temperature = str(round(extra + self.unit.getTempInterval()))
+		# 	self.canvas.delete("temp")
+		# 	self.canvas.create_text(585,225, text='Temp: %s °C'% temperature, font = "Helvetica 10 bold", anchor=N, tag="temp")
+		# 	extra = extra + 5
+		# 	value = value - 1
+		# 	time.sleep(5)
+
+		s = 1
+		x2 = 930
+		yTemp = (((self.unit.getTemp() * -1) / 20) * 50) + 200
+		yLight = (((self.unit.getLight() * -1) / 200) * 50) + 300
+
+		# Create the Plot instance
+		plotTemp = PlotTemp(s, x2, yTemp, 1000, self.unit, self.canvas)
+		plotTemp.keepPlotting()
+		plotLight = PlotLight(s, x2, yLight, 1000, self.unit, self.canvas)
+		plotLight.keepPlotting()
+
+
+
+

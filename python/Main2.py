@@ -43,7 +43,5 @@ connectEntry = Entry(rootcanvas, width=7) #textvariable=self.light_limit
 connectEntry_window = rootcanvas.create_window(650, 12, window=connectEntry)
 connectEntry.insert(10, "COM..")
 
-#print(elementen) 195 265
-
 
 window.mainloop()

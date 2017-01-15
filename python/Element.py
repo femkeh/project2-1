@@ -11,6 +11,6 @@ class Element:
 		self.unit=unit
 		self.s=s
 
-		View(self.elementCanvas)
+		View(self.elementCanvas, self.unit)
 		SideController(self.elementCanvas, self.naam, self.unit, self.s)
 		BottomController(self.elementCanvas, self.unit)
