@@ -38,7 +38,7 @@ tempTotal = 0
 ser.write([23])
 byte = read_byte()
 if (byte < 20 and byte > 10):
-    print("Light is:", read_double()) # print("Temp limit set on:", read_byte())   read_temp(read_byte())
+    print("Light limit is set on:", read_double()) # print("Temp limit set on:", read_byte())   read_temp(read_byte())
 else:
     print("some kind of error:", protocol.get(byte).title) #.get('title'))
 # print(read_temp((tempTotal / tempReads)))

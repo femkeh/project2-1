@@ -19,11 +19,9 @@ class PlotTemp():
 	def togglePlotting(self):
 		if self._plottingPaused: # current state is paused
 			self.keepPlotting()
-			# self.btnPause.config(text="Pause")
 			self._plottingPaused = False
 		else: # current state is running
 			self.canvas.after_cancel(self.canvasCmdAfterId) # cancel queued cmd
-			#self.btnPause.config(text="Continue")
 			self._plottingPaused = True
 
 	def plotOneStep(self):
@@ -31,16 +29,13 @@ class PlotTemp():
 			# step limit reached; draw a new plot
 			self.s = 1
 			self.x2 = 930
-			self.canvas.delete('temp') # only delete items tagged as temp
+			self.canvas.delete('temp-temp') # only delete items tagged as temp-temp
 
 		x1 = self.x2
 		y1 = self.y2
-		self.x2 = 930- + self.s * 8
-		if round(self.unit.getTemp()) < 0:
-			self.y2 = (((self.unit.getTemp() * -1) / 20) * 50) + 200
-		else :
-			self.y2 = (((self.unit.getTemp() * -1) / 20) * 50) + 200
-		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='blue', tags='temp')
+		self.x2 = 930 - self.s * 8
+		self.y2 = (((self.unit.getTemp() * -1) / 20) * 50) + 200
+		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='blue', tags='temp-temp')
 		self.s = self.s + 1
 
 	def keepPlotting(self):

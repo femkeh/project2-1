@@ -16,11 +16,6 @@ protocol = {
         "response": "ERROR",
         "label": "_"
     },
-    3: {
-        "title": "It's not there yet! You slacker!",
-        "response": "ERROR",
-        "label": "_"
-    },
     # 11-20: Success codes
     11: {
         "title": "Success",
@@ -29,19 +24,19 @@ protocol = {
         "getMoreData": 0
     },
     12: {
-        "title": "Success",
+        "title": "Success +1",
         "response": "OK + 1 byte",
         "label": "_",
         "getMoreData": 1
     },
     13: {
-        "title": "Success",
+        "title": "Success +2",
         "response": "OK + 2 byte",
         "label": "_",
         "getMoreData": 2
     },
     14: {
-        "title": "Success",
+        "title": "Success +3",
         "response": "OK + 3 byte",
         "label": "_",
         "getMoreData": 3

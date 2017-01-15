@@ -1,4 +1,5 @@
 from tkinter import *
+from Update import *
 import serial
 import time
 
@@ -9,22 +10,21 @@ class SideController():
 		self.unit = unit
 		self.s=s
 
+
 		###--- drawButtonsSide ---###
 		
-		#nameModule = getName()
 		nameModule = self.naam
 		self.canvas.create_text(52,10, text='Name: %s'% nameModule, font = "Helvetica 10 bold", anchor=N)
-		#status = getStatus()
-		status = ""
-		statusValue = self.unit.getCommand(27) #"Rolled down" ######
-		if statusValue == 0:
-			status = "Rolled down"
-		else:
-			status = "Rolled up"
-		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag=status)
+		# status = ""
+		# statusValue = self.unit.getCommand(27) #"Rolled down" ######
+		# if statusValue == 0:
+		# 	status = "Rolled down"
+		# else:
+		# 	status = "Rolled up"
+		# self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag=status)
 		
-		temp = str(round(self.unit.getTemp())) + " °C"
-		self.canvas.create_text(170,120, text=' %s'% temp, font = "Helvetica 95 bold", anchor=N)
+		# temp = str(round(self.unit.getTemp())) + " °C"
+		# self.canvas.create_text(170,120, text=' %s'% temp, font = "Helvetica 95 bold", anchor=N)
 
 		self.canvas.create_text(60,270, text='Manual:', anchor=N)
 
@@ -35,6 +35,10 @@ class SideController():
 		self.buttonOff = Button(self.canvas, text = "Off", state=DISABLED, command = self.manualOff) #anchor = SW , command = manual
 		self.buttonOff.configure(width = 7) # activebackground = "#33B5E5",
 		self.buttonOff_window = self.canvas.create_window(66, 325, window=self.buttonOff) # anchor=NW,
+
+		# Updating the status and the temperature of the side controller
+		updateSideController = Update(s, 2000, self.unit, self.canvas)
+		updateSideController.keepPlotting()
 
 	def manualOn(self):
 		self.unit.getCommand(47)

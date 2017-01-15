@@ -40,17 +40,6 @@ class View():
 
 
 		###---- drawLinesInGraph ----####
-		# hij rekent em eerst helemaal uit voordat ie et neerzet.. et is geen live verbinding..
-		# value = 5
-		# extra = 0
-		# while value > 0:
-		# 	temperature = str(round(extra + self.unit.getTempInterval()))
-		# 	self.canvas.delete("temp")
-		# 	self.canvas.create_text(585,225, text='Temp: %s °C'% temperature, font = "Helvetica 10 bold", anchor=N, tag="temp")
-		# 	extra = extra + 5
-		# 	value = value - 1
-		# 	time.sleep(5)
-
 		s = 1
 		x2 = 930
 		yTemp = (((self.unit.getTemp() * -1) / 20) * 50) + 200
@@ -58,8 +47,8 @@ class View():
 
 		# Create the Plot instance
 		plotTemp = PlotTemp(s, x2, yTemp, 1000, self.unit, self.canvas)
-		plotTemp.keepPlotting()
 		plotLight = PlotLight(s, x2, yLight, 1000, self.unit, self.canvas)
+		plotTemp.keepPlotting()
 		plotLight.keepPlotting()
 
 

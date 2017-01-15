@@ -19,11 +19,9 @@ class PlotLight():
 	def togglePlotting(self):
 		if self._plottingPaused: # current state is paused
 			self.keepPlotting()
-			# self.btnPause.config(text="Pause")
 			self._plottingPaused = False
 		else: # current state is running
 			self.canvas.after_cancel(self.canvasCmdAfterId) # cancel queued cmd
-			#self.btnPause.config(text="Continue")
 			self._plottingPaused = True
 
 	def plotOneStep(self):
@@ -31,13 +29,13 @@ class PlotLight():
 			# step limit reached; draw a new plot
 			self.s = 1
 			self.x2 = 930
-			self.canvas.delete('temp') # only delete items tagged as temp
+			self.canvas.delete('temp-light') # only delete items tagged as temp-light
 
 		x1 = self.x2
 		y1 = self.y2
 		self.x2 = 930 - self.s * 8
 		self.y2 = (((self.unit.getLight() * -1) / 200) * 50) + 300
-		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='red', tags='temp')
+		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='red', tags='temp-light')
 		self.s = self.s + 1
 
 	def keepPlotting(self):
