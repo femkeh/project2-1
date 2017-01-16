@@ -35,9 +35,13 @@ tempTotal = 0
 #     print("Light limit is set") # print("Temp limit set on:", read_byte())   read_temp(read_byte())
 # else:
 #     print("some kind of error:", protocol.get(byte).title) #.get('title'))
-ser.write([28])
+ser.write([47])
 byte = read_byte()
 if (byte < 20 and byte > 10):
+    # manual mode is set
+    ser.write([50])
+    for i in range(0, 50):
+        print("distanceValue: ", read_double())
     print("Current distance is set on:", (read_double() / 60) * 15) # print("Temp limit set on:", read_byte())   read_temp(read_byte())
 else:
     print("some kind of error:", protocol.get(byte).title) #.get('title'))

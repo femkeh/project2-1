@@ -33,6 +33,10 @@ class ControlUnit:
 		if (responseId == 12):
 			data = self.read_byte()
 
+		if (responseId == 13):
+			data = self.read_double()
+
+
 		return data
 
 
@@ -116,6 +120,22 @@ class ControlUnit:
 		if (responseId < 11 or responseId > 20):
 			return False
 
+	def setRolldownLimit(self, value):
+		value1 = 0
+		value2 = 0
+		if (int(value) - 256) < 0:
+			value1 = 0
+			value2 = int(value)
+		else:
+			value1 = 1
+			value2 = int(value) - 256
+
+		self.ser.write([43])
+		self.ser.write([value1])
+		self.ser.write([value2])
+		responseId = self.read_byte()
+		if (responseId < 11 or responseId > 20):
+			return False
 
 	def read_byte(self):
 		byte = ord(self.ser.read(1))

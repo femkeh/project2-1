@@ -6,13 +6,13 @@ import time
 class SideController():
 	def __init__(self, canvas, naam, unit, s):
 		self.canvas = canvas
-		self.naam = naam	
+		self.naam = naam
 		self.unit = unit
 		self.s=s
 
 
 		###--- drawButtonsSide ---###
-		
+
 		nameModule = self.naam
 		self.canvas.create_text(52,10, text='Name: %s'% nameModule, font = "Helvetica 10 bold", anchor=N)
 		# status = ""
@@ -22,7 +22,7 @@ class SideController():
 		# else:
 		# 	status = "Rolled up"
 		# self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag=status)
-		
+
 		# temp = str(round(self.unit.getTemp())) + " °C"
 		# self.canvas.create_text(170,120, text=' %s'% temp, font = "Helvetica 95 bold", anchor=N)
 
@@ -41,22 +41,22 @@ class SideController():
 		updateSideController.keepPlotting()
 
 	def manualOn(self):
-		self.buttonOn.config(state=DISABLED) 
-		self.buttonOff.config(state=NORMAL) 
+		self.buttonOn.config(state=DISABLED)
+		self.buttonOff.config(state=NORMAL)
 		self.buttonUp = Button(self.canvas, command=self.screenUp) #text = "Roll up" ''', command=self.screenUp'''
 		self.photoUp = PhotoImage(file="ArrowUp.gif")
 		self.buttonUp.config(image=self.photoUp,width="50",height="20")
-		self.buttonUp_window = self.canvas.create_window(180, 300, window=self.buttonUp, anchor=N) 
+		self.buttonUp_window = self.canvas.create_window(180, 300, window=self.buttonUp, anchor=N)
 
 		# self.buttonStop = Button(self.canvas, command=self.screenStop) #text = "Roll down" '', command=self.screenStop'''
 		# self.photoStop = PhotoImage(file="Stop.gif")
 		# self.buttonStop.config(image=self.photoStop,width="50",height="20")
-		# self.buttonStop_window = self.canvas.create_window(260, 300, window=self.buttonStop, anchor=N) 
-		
+		# self.buttonStop_window = self.canvas.create_window(260, 300, window=self.buttonStop, anchor=N)
+
 		self.buttonDown = Button(self.canvas, command=self.screenDown) #text = "Roll down" '', command=self.screenDown'''
 		self.photoDown = PhotoImage(file="ArrowDown.gif")
 		self.buttonDown.config(image=self.photoDown,width="50",height="20")
-		self.buttonDown_window = self.canvas.create_window(340, 300, window=self.buttonDown, anchor=N) 
+		self.buttonDown_window = self.canvas.create_window(340, 300, window=self.buttonDown, anchor=N)
 
 		statusValue = self.unit.getCommand(27)
 		if statusValue == 0:
@@ -73,8 +73,8 @@ class SideController():
 		self.buttonUp.destroy()
 		self.buttonDown.destroy()
 		#self.buttonStop.destroy()
-		self.buttonOn.config(state=NORMAL) 
-		self.buttonOff.config(state=DISABLED) 
+		self.buttonOn.config(state=NORMAL)
+		self.buttonOff.config(state=DISABLED)
 
 	def screenUp(self):
 		# self.s="up"
@@ -86,7 +86,11 @@ class SideController():
 		# 	i+=1
 		# 	#print(s[0:3])
 		# if self.s[0:3]=='RES': i=10
-		self.unit.getCommand(50)
+		self.unit.getCommand(50) # set blinking / change state
+		# update status
+		status=""
+		while (self.unit.getCommand(29)):
+			print("is blinking, block python")
 		# update status
 		status=""
 		statusValue = self.unit.getCommand(27) #"Rolled down" ######
@@ -113,21 +117,26 @@ class SideController():
 		# 	i+=1
 		# 	#print(s[0:3])
 		# if self.s[0:3]=='RES': i=10
-		self.unit.getCommand(50)
+		self.unit.getCommand(50) # set blinking / change state
 		# update status
 		status=""
+		while (self.unit.getCommand(29)):
+			print("is blinking, block python")
+
 		statusValue = self.unit.getCommand(27) #"Rolled down" ######
 		if statusValue == 0:
 			status = "Rolled down"
+			print("statusValue down: ", statusValue)
 			self.buttonDown.config(state=DISABLED)
 			self.buttonUp.config(state=NORMAL)
 		else:
 			status = "Rolled up"
 			self.buttonUp.config(state=DISABLED)
+			print("statusValue up: ", statusValue)
 			self.buttonDown.config(state=NORMAL)
 		self.canvas.delete("status")
 		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
-	
+
 	def screenStop(self):
 		self.s="stop"
 		self.unit.write(self.s.encode('ascii'))
