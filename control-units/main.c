@@ -2,7 +2,7 @@
  * GccApplication6.c
  *
  * Created: 3-11-2016 16:46:41
- *  Author: 
+ *  Author:
  */
 
  // Set light limit doet et niet, moet tussen de 0 - 255 zijn, maar is niet reeel. Hoe kan dat groter?
@@ -36,6 +36,10 @@ uint8_t _state = 1; //ROLLED_UP = 1, ROLLED_DOWN = 0
 
 int adc_value;        // Variable used to store the value read from the ADC converter
 
+uint16_t _distanceValue = 0; // distancesensor last measurement
+volatile uint16_t _gv_counter; // 16 bit
+volatile uint8_t _echo; // a flag
+
 void uart_init(void) {
 	UBRR0H = UBRRH_VALUE;
 	UBRR0L = UBRRL_VALUE;
@@ -68,8 +72,27 @@ void adc_init() {
 }
 
 void init_ports() {
-    DDRB = 0xff; // set port D as output
+    DDRB = 0xff; // set port B as output
     PORTB = 0x00; // LEDs off
+    DDRD &= ~(1 << PIND3);
+	DDRD |= (1 << PIND2);
+    PORTD = 0x00;
+    _delay_us(2);
+}
+
+void init_timer(void)
+// prescale, no interrupt, counting up
+{
+    // prescaling : max time = 2^16/16E6 = 4.1 ms, 4.1 >> 2.3, so no prescaling required
+    TCCR1A = 0;
+    TCCR1B = _BV(CS10);
+}
+
+void init_ext_int(void)
+{
+    // any change triggers ext interrupt 1
+    EICRA = (1 << ISC10);
+    EIMSK = (1 << INT1);
 }
 
 uint16_t getAdcValue(uint8_t channel) {
@@ -117,7 +140,7 @@ void getCurrentState() {
 
 //----Set functions----
 void setTempLimit() {
-    // set tempLimit; 
+    // set tempLimit;
     _tempLimit = uart_getByte();
       if (_tempLimit <= 0) {
         uart_putByte(2);
@@ -171,7 +194,7 @@ void blinkYellowLed() {
     uint8_t max = _maxDownLimit;
     redLightOff();
     while (max > 0) {
-        PORTB |= _BV(PORTB2);// PORTD=0x0f; // LEDs on
+        PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
         // delay 0.5 sec
         _delay_ms(500);
         PORTB=0x00; // led off
@@ -182,7 +205,7 @@ void blinkYellowLed() {
     if (_state == 0) {
         _state = 1;
         redLightOn();
-    } 
+    }
     else {
         _state = 0;
         greenLightOn();
@@ -214,19 +237,36 @@ void checkTempLimit() {
 }
 
 void checkLightLimit() {
-    if (_currentMode == 0) {    
+    if (_currentMode == 0) {
         if (getAdcValue(0) >= _lightLimit && _state == 1) {
             blinkYellowLed();
         }
     }
 }
 
+void checkDistanceMeter() {
+    _echo = 0x1; // set flag
+    // start trigger puls lo -> hi
+    PORTD |= _BV(PIND2); // set bit D2
+    _delay_us(12); // micro sec
+    PORTD &=~ _BV(PIND2); // clear bit D2
+    _delay_ms(20); // milli sec, timer1 is read in ISR
+    _distanceValue = _gv_counter;
+    _delay_ms(10);
+}
 
+void getCurrentDistance() {
+    uart_putDouble(_distanceValue);
+}
 
 int main(void) {
 	uart_init();
     adc_init();
+
     init_ports();
+    init_ext_int();
+    init_timer();
+
     SCH_Init_T1();
     SCH_Start();
     if (_state == 1) {
@@ -244,14 +284,26 @@ int main(void) {
     // SCH_Add_Task(getLight, 0, 100);
     SCH_Add_Task(checkTempLimit, 0, 10);
     SCH_Add_Task(checkLightLimit, 0, 10);
+    SCH_Add_Task(checkDistanceMeter, 0, 50);
 
     sei();
-
     while (1) {
         SCH_Dispatch_Tasks();
-        // uart_putByte(0x50);
     }
     return 0;
+}
+
+ISR (INT1_vect)
+{
+    if (_echo == 0x1) {
+        // set timer1 value to zero
+        TCNT1 = 0;
+        // clear flag
+        _echo = 0x0;
+    } else {
+        // read value timer1
+        _gv_counter = TCNT1;
+    }
 }
 
 ISR (USART_RX_vect)
@@ -271,7 +323,7 @@ ISR (USART_RX_vect)
         case 22:
         // getTempLimit
         uart_putByte(12);
-        getTempLimit(); 
+        getTempLimit();
         break;
 
         case 23:
@@ -283,7 +335,7 @@ ISR (USART_RX_vect)
         case 24:
         // getLightLimit
         uart_putByte(13);
-        getLightLimit(); 
+        getLightLimit();
         break;
 
         case 25:
@@ -295,19 +347,25 @@ ISR (USART_RX_vect)
         case 26:
         // getMinDownLimit
         uart_putByte(12);
-        getMinDownLimit(); 
+        getMinDownLimit();
         break;
 
         case 27:
         // getCurrentState
         uart_putByte(12);
-        getCurrentState(); 
+        getCurrentState();
+        break;
+
+        case 28:
+        // getCurrentDistance
+        uart_putByte(13);
+        getCurrentDistance();
         break;
 
         // 41-46
         case 41:
         // setTempLimit
-        setTempLimit(); 
+        setTempLimit();
         break;
 
         case 42: ;
@@ -317,17 +375,17 @@ ISR (USART_RX_vect)
 
         case 43:
         // setMaxDownLimit
-        setMaxDownLimit(); 
+        setMaxDownLimit();
         break;
 
         case 44:
         // setMinDownLimit
-        setMinDownLimit(); 
+        setMinDownLimit();
         break;
 
         case 45:
         // set state roll down
-        setStateRollDown(); 
+        setStateRollDown();
         redLightOff();
         greenLightOn();
         uart_putByte(11);
@@ -335,24 +393,24 @@ ISR (USART_RX_vect)
 
         case 46:
         // set state roll down
-        setStateRollUp(); 
+        setStateRollUp();
         redLightOff();
         redLightOn();
         uart_putByte(11);
         break;
 
         case 47:
-        setModeToManual(); 
+        setModeToManual();
         uart_putByte(11);
         break;
 
         case 48:
-        setManualToMode(); 
+        setManualToMode();
         uart_putByte(11);
         break;
 
         case 50:
-        blinkYellowLed(); 
+        blinkYellowLed();
         uart_putByte(11);
         break;
 

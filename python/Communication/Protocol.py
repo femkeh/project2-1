@@ -70,6 +70,10 @@ protocol = {
         "title": "Get current state",
         "label": "getCurrentState"
     },
+    28: {
+        "title": "Get current distance",
+        "label": "getCurrentDistance"
+    },
     # 41-60 Set
     41: {
         "title": "Set temp limit",
