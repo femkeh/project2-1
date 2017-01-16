@@ -30,7 +30,7 @@ class View():
 				self.canvas.create_text(440,y, text='0', anchor=E)
 			else: 
 				self.canvas.create_text(440,y, text='%d00'% (i*2), anchor=E)
-		self.canvas.create_text(440,35, text='Lux', font = "Helvetica 16 bold", anchor=E, fill='red')
+		self.canvas.create_text(440,35, text='Lichtintensiteit', font = "Helvetica 16 bold", anchor=E, fill='red')
 
 		# y-axis temp (-40, 60)
 		for i in range(6):

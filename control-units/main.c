@@ -24,7 +24,7 @@
 // Global variables, maar gehardcode dus als setters gebruikt worden dan is dat alleen in zelfde connectie, wordt niet opgeslagen
 uint8_t _tempLimit = 174;
 
-uint16_t _lightLimit = 300;
+uint16_t _lightLimit = 600;
 
 uint8_t _maxDownLimit = 100;
 
@@ -68,8 +68,8 @@ void adc_init() {
 }
 
 void init_ports() {
-    DDRD = 0xff; // set port D as output
-    PORTD = 0x00; // LEDs off
+    DDRB = 0xff; // set port D as output
+    PORTB = 0x00; // LEDs off
 }
 
 uint16_t getAdcValue(uint8_t channel) {
@@ -171,10 +171,10 @@ void blinkYellowLed() {
     uint8_t max = _maxDownLimit;
     redLightOff();
     while (max > 0) {
-        PORTD |= _BV(PORTD4);// PORTD=0x0f; // LEDs on
+        PORTB |= _BV(PORTB2);// PORTD=0x0f; // LEDs on
         // delay 0.5 sec
         _delay_ms(500);
-        PORTD=0x00; // led off
+        PORTB=0x00; // led off
         // delay 0.5 sec
         _delay_ms(500);
         max = max - 10; // remove 10 cms
@@ -190,30 +190,34 @@ void blinkYellowLed() {
 }
 
 void redLightOn() {
-    PORTD |= _BV(PORTD2);
+    PORTB |= _BV(PORTB0);
 }
 
 void redLightOff() {
-    PORTD=0x00;  // is alle poorten D uit..
+    PORTB=0x00;  // is alle poorten D uit..
 }
 
 void greenLightOn() {
-    PORTD |= _BV(PORTD3);
+    PORTB |= _BV(PORTB1);
 }
 
 void greenLightOff() {
-    PORTD=0x00;  // is alle poorten D uit..
+    PORTB=0x00;  // is alle poorten D uit..
 }
 
 void checkTempLimit() {
-    if (getAdcValue(1) >= _tempLimit && _state == 1) {
-        blinkYellowLed();
+    if (_currentMode == 0) {
+        if (getAdcValue(1) >= _tempLimit && _state == 1) {
+            blinkYellowLed();
+        }
     }
 }
 
 void checkLightLimit() {
-    if (getAdcValue(0) >= _lightLimit && _state == 1) {
-        blinkYellowLed();
+    if (_currentMode == 0) {    
+        if (getAdcValue(0) >= _lightLimit && _state == 1) {
+            blinkYellowLed();
+        }
     }
 }
 
@@ -326,7 +330,7 @@ ISR (USART_RX_vect)
         setStateRollDown(); 
         redLightOff();
         greenLightOn();
-        uart_putByte(12);
+        uart_putByte(11);
         break;
 
         case 46:
@@ -334,21 +338,22 @@ ISR (USART_RX_vect)
         setStateRollUp(); 
         redLightOff();
         redLightOn();
-        uart_putByte(12);
+        uart_putByte(11);
         break;
 
         case 47:
         setModeToManual(); 
-        uart_putByte(12);
+        uart_putByte(11);
         break;
 
         case 48:
         setManualToMode(); 
-        uart_putByte(12);
+        uart_putByte(11);
         break;
 
         case 50:
         blinkYellowLed(); 
+        uart_putByte(11);
         break;
 
   }

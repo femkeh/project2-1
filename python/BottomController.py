@@ -29,8 +29,8 @@ class BottomController():
 		self.labelLight = Label(self.canvas, text="Light limit:")
 		self.labelLight_window = self.canvas.create_window(60, 400, window=self.labelLight) 
 			#Output
-		self.textLight = Label(self.canvas, text=str(self.lightLimitValue) + " Lux")     
-		self.textLight_window = self.canvas.create_window(117, 428, window=self.textLight)
+		self.textLight = Label(self.canvas, text=str(self.lightLimitValue) + " Lichtint.")     
+		self.textLight_window = self.canvas.create_window(132, 428, window=self.textLight)
 
 		# Temperature limit
 			#Entry

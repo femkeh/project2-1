@@ -41,8 +41,6 @@ class SideController():
 		updateSideController.keepPlotting()
 
 	def manualOn(self):
-		self.unit.getCommand(47)
-
 		self.buttonOn.config(state=DISABLED) 
 		self.buttonOff.config(state=NORMAL) 
 		self.buttonUp = Button(self.canvas, command=self.screenUp) #text = "Roll up" ''', command=self.screenUp'''
@@ -59,6 +57,15 @@ class SideController():
 		self.photoDown = PhotoImage(file="ArrowDown.gif")
 		self.buttonDown.config(image=self.photoDown,width="50",height="20")
 		self.buttonDown_window = self.canvas.create_window(340, 300, window=self.buttonDown, anchor=N) 
+
+		statusValue = self.unit.getCommand(27)
+		if statusValue == 0:
+			self.buttonDown.config(state=DISABLED)
+			self.buttonUp.config(state=NORMAL)
+		else:
+			self.buttonUp.config(state=DISABLED)
+			self.buttonDown.config(state=NORMAL)
+		self.unit.getCommand(47)
 
 	def manualOff(self):
 		self.unit.getCommand(48)
@@ -85,8 +92,13 @@ class SideController():
 		statusValue = self.unit.getCommand(27) #"Rolled down" ######
 		if statusValue == 0:
 			status = "Rolled down"
+			self.buttonDown.config(state=DISABLED)
+			self.buttonUp.config(state=NORMAL)
+
 		else:
 			status = "Rolled up"
+			self.buttonUp.config(state=DISABLED)
+			self.buttonDown.config(state=NORMAL)
 		self.canvas.delete("status")
 		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
 
@@ -107,8 +119,12 @@ class SideController():
 		statusValue = self.unit.getCommand(27) #"Rolled down" ######
 		if statusValue == 0:
 			status = "Rolled down"
+			self.buttonDown.config(state=DISABLED)
+			self.buttonUp.config(state=NORMAL)
 		else:
 			status = "Rolled up"
+			self.buttonUp.config(state=DISABLED)
+			self.buttonDown.config(state=NORMAL)
 		self.canvas.delete("status")
 		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
 	

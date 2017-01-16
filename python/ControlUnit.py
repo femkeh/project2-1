@@ -29,7 +29,9 @@ class ControlUnit:
 		if (responseId < 11 or responseId > 20):
 			return False
 
-		data = self.read_byte()
+		data = 0
+		if (responseId == 12):
+			data = self.read_byte()
 
 		return data
 
