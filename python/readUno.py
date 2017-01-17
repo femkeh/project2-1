@@ -39,12 +39,14 @@ tempTotal = 0
 # byte = read_byte()
 # if (byte < 20 and byte > 10):
 #     # manual mode is set
-ser.write([50])
+# ser.write([28])
+
 for i in range(0, 50):
+    ser.write([28])
     print("distanceValue: ", read_double())
     print("Current distance is set on:", (read_double() / 60) * 15) # print("Temp limit set on:", read_byte())   read_temp(read_byte())
-else:
-    print("some kind of error:", protocol.get(byte).title) #.get('title'))
+# else:
+#     print("some kind of error:", protocol.get(byte).title) #.get('title'))
 # print(read_temp((tempTotal / tempReads)))
     # time.sleep(0.05)
 

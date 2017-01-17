@@ -27,7 +27,7 @@ uint16_t _lightLimit = 500;
 
 uint8_t _blinking = 0;
 
-uint16_t _maxDownLimit = 400; // 100cm = 100 / 15 * 60
+uint16_t _maxDownLimit = 200; // 100cm = 100 / 15 * 60 = 400, 50 cm = 50 / 15 * 60 = 200
 
 uint16_t _minDownLimit = 40; // 10cm = 10 / 15 * 60
 
@@ -197,7 +197,7 @@ void setManualToMode() {
 }
 
 void blinkYellowLed() {
-    _blinking = 1; // true
+    _blinking = 1; // true, = 0 -> false
 }
 
 void redLightOn() {
@@ -221,12 +221,18 @@ void checkTempLimit() {
         if (getAdcValue(1) >= _tempLimit && _state == 1) {
             blinkYellowLed();
         }
+        if (getAdcValue(1) <= _tempLimit && _state == 0) {
+            blinkYellowLed();
+        }
     }
 }
 
 void checkLightLimit() {
     if (_currentMode == 0) {
         if (getAdcValue(0) >= _lightLimit && _state == 1) {
+            blinkYellowLed();
+        }
+        if (getAdcValue(0) <= _lightLimit && _state == 0) {
             blinkYellowLed();
         }
     }
@@ -281,7 +287,7 @@ int main(void) {
             redLightOff();
 
             if (_state == 0) {
-                while (_distanceValue >= (_maxDownLimit - _minDownLimit)) {
+                while (_distanceValue <= _maxDownLimit) {
                     PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
                     // delay 0.5 sec
                     _delay_ms(500);

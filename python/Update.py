@@ -3,7 +3,6 @@ import math
 import time
 
 class Update():
-	# _PLOT_STEP_BOUNDARY = 10
 
 	def __init__(self, s, pauseInMs, unit, canvas):
 		self._plottingPaused = False
@@ -15,21 +14,23 @@ class Update():
 		self.canvas = canvas
 
 	def togglePlotting(self):
-		if self._plottingPaused: # current state is paused
+		# current state = paused
+		if self._plottingPaused: 
 			self.keepPlotting()
 			self._plottingPaused = False
-		else: # current state is running
-			self.canvas.after_cancel(self.canvasCmdAfterId) # cancel queued cmd
+		# current state = running
+		else: 
+			self.canvas.after_cancel(self.canvasCommand) # cancel queued command
 			self._plottingPaused = True
 
 	def plotOneStep(self):
-		# if self.s == self._PLOT_STEP_BOUNDARY:
-		# 	# step limit reached; draw a new plot
-		# 	self.s = 1
-		self.canvas.delete('temp-status') # only delete items tagged as temp-temp
+		while (self.unit.getCommand(29)):
+			blink = True
+
+		self.canvas.delete('temp-status') # delete items tagged as temp-status
 
 		status = ""
-		statusValue = self.unit.getCommand(27) #"Rolled down" ######
+		statusValue = self.unit.getCommand(27) #"Rolled down" 
 		if statusValue == 0:
 			status = "Rolled down"
 		else:
@@ -39,8 +40,6 @@ class Update():
 		temp = str(round(self.unit.getTemp())) + " °C"
 		self.canvas.create_text(170,120, text=' %s'% temp, font = "Helvetica 95 bold", anchor=N, tag='temp-status')
 
-		# self.s = self.s + 1
-
 	def keepPlotting(self):
 		self.plotOneStep()
-		self.canvasCmdAfterId = self.canvas.after(self.pauseInMs, self.keepPlotting)
+		self.canvasCommand = self.canvas.after(self.pauseInMs, self.keepPlotting)

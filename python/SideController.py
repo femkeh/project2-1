@@ -15,16 +15,6 @@ class SideController():
 
 		nameModule = self.naam
 		self.canvas.create_text(52,10, text='Name: %s'% nameModule, font = "Helvetica 10 bold", anchor=N)
-		# status = ""
-		# statusValue = self.unit.getCommand(27) #"Rolled down" ######
-		# if statusValue == 0:
-		# 	status = "Rolled down"
-		# else:
-		# 	status = "Rolled up"
-		# self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag=status)
-
-		# temp = str(round(self.unit.getTemp())) + " °C"
-		# self.canvas.create_text(170,120, text=' %s'% temp, font = "Helvetica 95 bold", anchor=N)
 
 		self.canvas.create_text(60,270, text='Manual:', anchor=N)
 
@@ -77,23 +67,14 @@ class SideController():
 		self.buttonOff.config(state=DISABLED)
 
 	def screenUp(self):
-		# self.s="up"
-		# self.unit.write(self.s.encode('ascii'))
-		# self.unit.write('\n'.encode('ascii'))
-		# i=0
-		# while i<3:
-		# 	self.s=self.unit.readline().decode('ascii').strip()
-		# 	i+=1
-		# 	#print(s[0:3])
-		# if self.s[0:3]=='RES': i=10
 		self.unit.getCommand(50) # set blinking / change state
-		# update status
+		# check if still blinking, after blinking, update
 		while (self.unit.getCommand(29)):
 			blink = True
 
 		# update status
 		status=""
-		statusValue = self.unit.getCommand(27) #"Rolled down" ######
+		statusValue = self.unit.getCommand(27) #"Rolled down"
 		if statusValue == 0:
 			status = "Rolled down"
 			self.buttonDown.config(state=DISABLED)
@@ -108,22 +89,14 @@ class SideController():
 
 
 	def screenDown(self):
-		# self.s="down"
-		# self.unit.write(self.s.encode('ascii'))
-		# self.unit.write('\n'.encode('ascii'))
-		# i=0
-		# while i<3:
-		# 	self.s=self.unit.readline().decode('ascii').strip()
-		# 	i+=1
-		# 	#print(s[0:3])
-		# if self.s[0:3]=='RES': i=10
 		self.unit.getCommand(50) # set blinking / change state
-		# update status
+		# check if still blinking, after blinking, update
 		while (self.unit.getCommand(29)):
 			blink = True
 
+		# update status
 		status=""
-		statusValue = self.unit.getCommand(27) #"Rolled down" ######
+		statusValue = self.unit.getCommand(27) #"Rolled down" 
 		if statusValue == 0:
 			status = "Rolled down"
 			self.buttonDown.config(state=DISABLED)

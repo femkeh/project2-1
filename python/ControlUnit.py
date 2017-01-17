@@ -6,22 +6,6 @@ class ControlUnit:
 		self.ser = ser
 		self.protocol = protocol
 
-	# def getCommand(self, commandId):
-	# 	command = self.protocol[commandId]
-
-	# 	self.ser.write([commandId])
-
-	# 	responseId = self.read_byte()
-	# 	if (responseId < 11 or responseId > 20):
-	# 		return False
-
-	# 	response = self.protocol[responseId]
-	# 	i = response['getMoreData']
-	# 	data = 0
-	# 	while (i):
-	# 		data += (self.read_byte() << 8 * i)
-	# 		i -= 1;
-
 	def getCommand(self, commandId):
 		self.ser.write([commandId])
 

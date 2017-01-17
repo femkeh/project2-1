@@ -17,19 +17,21 @@ class PlotLight():
 		self.canvas = canvas
 
 	def togglePlotting(self):
-		if self._plottingPaused: # current state is paused
+		# current state = paused
+		if self._plottingPaused:
 			self.keepPlotting()
 			self._plottingPaused = False
-		else: # current state is running
-			self.canvas.after_cancel(self.canvasCmdAfterId) # cancel queued cmd
+		# current state = running
+		else: 
+			self.canvas.after_cancel(self.canvasCommand) # cancel queued command
 			self._plottingPaused = True
 
 	def plotOneStep(self):
+		# if step boundary reached; start from beginning of drawing plot
 		if self.s == self._PLOT_STEP_BOUNDARY:
-			# step limit reached; draw a new plot
 			self.s = 1
 			self.x2 = 930
-			self.canvas.delete('temp-light') # only delete items tagged as temp-light
+			self.canvas.delete('temp-light') # delete items tagged as temp-light
 
 		x1 = self.x2
 		y1 = self.y2
@@ -40,4 +42,4 @@ class PlotLight():
 
 	def keepPlotting(self):
 		self.plotOneStep()
-		self.canvasCmdAfterId = self.canvas.after(self.pauseInMs, self.keepPlotting)
+		self.canvasCommand = self.canvas.after(self.pauseInMs, self.keepPlotting)

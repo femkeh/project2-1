@@ -11,7 +11,7 @@ class View():
 		###--- drawGraph ---###
 
 		self.canvas.create_line(450,300,930,300, width=2) # x-axis
-		self.canvas.create_line(450,300,450,50, width=2) # y-axis lux
+		self.canvas.create_line(450,300,450,50, width=2) # y-axis lichtintensiteit
 		self.canvas.create_line(930,300,930,50, width=2) # y2-axis temperatuur
 		self.canvas.create_line(0,450,1000,450, width=2) # bottom GUI
 
@@ -34,7 +34,7 @@ class View():
 
 		# y-axis temp (-40, 60)
 		for i in range(6):
-			y = 300 - (i * 50) #offset vanaf linker scherm rand = 50 + voor elke stap ix100 verderop een lijn
+			y = 300 - (i * 50) #offset vanaf linker scherm rand = 50 + voor elke stap ix50 verderop een lijn
 			self.canvas.create_text(960,y, text='%d'% (20*(i-2)), anchor=E)
 		self.canvas.create_text(990,35, text='Degrees Celsius', font = "Helvetica 16 bold", anchor=E, fill='blue')
 
@@ -45,7 +45,7 @@ class View():
 		yTemp = (((self.unit.getTemp() * -1) / 20) * 50) + 200
 		yLight = (((self.unit.getLight() * -1) / 200) * 50) + 300
 
-		# Create the Plot instance
+		# Update de lijnen van temperatuur en lichtintensiteit
 		plotTemp = PlotTemp(s, x2, yTemp, 1000, self.unit, self.canvas)
 		plotLight = PlotLight(s, x2, yLight, 1000, self.unit, self.canvas)
 		plotTemp.keepPlotting()

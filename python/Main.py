@@ -5,9 +5,6 @@ from ControlUnit import *
 import serial
 import time
 
-# ser = serial.Serial('/dev/ttyACM0', 19200)
-# time.sleep(2)
-
 # Main
 window = Tk()
 window.wm_title("Rolluiksysteem                                                                                                                             Yumthy ©")

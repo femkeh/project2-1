@@ -1,0 +1,617 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+                              /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o (exit)
+/usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+                              main.o (__tablejump2__)
+/usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+                              main.o (__do_copy_data)
+/usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+                              AVR_TTC_scheduler.o (__do_clear_bss)
+
+Allocating common symbols
+Common symbol       size              file
+
+SCH_tasks_G         0x23              AVR_TTC_scheduler.o
+_echo               0x1               main.o
+_gv_counter         0x2               main.o
+adc_value           0x2               main.o
+
+Discarded input sections
+
+ .data          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+ .bss           0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+ .text          0x0000000000000000        0x0 AVR_TTC_scheduler.o
+ .data          0x0000000000000000        0x0 AVR_TTC_scheduler.o
+ .bss           0x0000000000000000        0x0 AVR_TTC_scheduler.o
+ .text          0x0000000000000000        0x0 main.o
+ .data          0x0000000000000000        0x0 main.o
+ .bss           0x0000000000000000        0x0 main.o
+ .text.setStateRollDown
+                0x0000000000000000        0x6 main.o
+ .text.setStateRollUp
+                0x0000000000000000        0x8 main.o
+ .text.setModeToManual
+                0x0000000000000000        0x8 main.o
+ .text.setManualToMode
+                0x0000000000000000        0x6 main.o
+ .text.blinkYellowLed
+                0x0000000000000000        0x8 main.o
+ .text.redLightOff
+                0x0000000000000000        0x4 main.o
+ .text.greenLightOff
+                0x0000000000000000        0x4 main.o
+ .text          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .data          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .bss           0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.mul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.div
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.prologue
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.builtins
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.fmul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc.fixed
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .text          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .data          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .bss           0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.prologue
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .text          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .data          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .bss           0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .text          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .data          0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .bss           0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x0000000000000000        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x0000000000000000 0x0000000000020000 xr
+data             0x0000000000800060 0x000000000000ffa0 rw !x
+eeprom           0x0000000000810000 0x0000000000010000 rw !x
+fuse             0x0000000000820000 0x0000000000000400 rw !x
+lock             0x0000000000830000 0x0000000000000400 rw !x
+signature        0x0000000000840000 0x0000000000000400 rw !x
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+LOAD AVR_TTC_scheduler.o
+LOAD main.o
+START GROUP
+LOAD /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a
+LOAD /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/libm.a
+LOAD /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/libc.a
+LOAD /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/libatmega328p.a
+END GROUP
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x0000000000000000      0x72a
+ *(.vectors)
+ .vectors       0x0000000000000000       0x68 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+                0x0000000000000000                __vectors
+                0x0000000000000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+                0x0000000000000068                . = ALIGN (0x2)
+                0x0000000000000068                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x0000000000000068        0x0 linker stubs
+ *(.trampolines*)
+                0x0000000000000068                __trampolines_end = .
+ *(.progmem*)
+                0x0000000000000068                . = ALIGN (0x2)
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x0000000000000068                __ctors_start = .
+ *(.ctors)
+                0x0000000000000068                __ctors_end = .
+                0x0000000000000068                __dtors_start = .
+ *(.dtors)
+                0x0000000000000068                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x0000000000000068        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+                0x0000000000000068                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x0000000000000068        0xc /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x0000000000000074       0x16 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000074                __do_copy_data
+ .init4         0x000000000000008a       0x10 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+                0x000000000000008a                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x000000000000009a        0x8 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+ *(.init9)
+ *(.text)
+ .text          0x00000000000000a2        0x4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+                0x00000000000000a2                __vector_20
+                0x00000000000000a2                __vector_1
+                0x00000000000000a2                __vector_24
+                0x00000000000000a2                __vector_12
+                0x00000000000000a2                __bad_interrupt
+                0x00000000000000a2                __vector_6
+                0x00000000000000a2                __vector_3
+                0x00000000000000a2                __vector_23
+                0x00000000000000a2                __vector_25
+                0x00000000000000a2                __vector_13
+                0x00000000000000a2                __vector_17
+                0x00000000000000a2                __vector_19
+                0x00000000000000a2                __vector_7
+                0x00000000000000a2                __vector_5
+                0x00000000000000a2                __vector_4
+                0x00000000000000a2                __vector_9
+                0x00000000000000a2                __vector_21
+                0x00000000000000a2                __vector_15
+                0x00000000000000a2                __vector_8
+                0x00000000000000a2                __vector_14
+                0x00000000000000a2                __vector_10
+                0x00000000000000a2                __vector_16
+                0x00000000000000a2                __vector_22
+                0x00000000000000a6                . = ALIGN (0x2)
+ *(.text.*)
+ .text.SCH_Add_Task
+                0x00000000000000a6       0x4c AVR_TTC_scheduler.o
+                0x00000000000000a6                SCH_Add_Task
+ .text.SCH_Delete_Task
+                0x00000000000000f2       0x1e AVR_TTC_scheduler.o
+                0x00000000000000f2                SCH_Delete_Task
+ .text.SCH_Dispatch_Tasks
+                0x0000000000000110       0x40 AVR_TTC_scheduler.o
+                0x0000000000000110                SCH_Dispatch_Tasks
+ .text.SCH_Init_T1
+                0x0000000000000150       0x2c AVR_TTC_scheduler.o
+                0x0000000000000150                SCH_Init_T1
+ .text.SCH_Start
+                0x000000000000017c        0x4 AVR_TTC_scheduler.o
+                0x000000000000017c                SCH_Start
+ .text.__vector_11
+                0x0000000000000180       0x56 AVR_TTC_scheduler.o
+                0x0000000000000180                __vector_11
+ .text.checkDistanceMeter
+                0x00000000000001d6       0x40 main.o
+                0x00000000000001d6                checkDistanceMeter
+ .text.uart_init
+                0x0000000000000216       0x1c main.o
+                0x0000000000000216                uart_init
+ .text.uart_putByte
+                0x0000000000000232        0xe main.o
+                0x0000000000000232                uart_putByte
+ .text.uart_putDouble
+                0x0000000000000240       0x12 main.o
+                0x0000000000000240                uart_putDouble
+ .text.uart_getByte
+                0x0000000000000252        0xe main.o
+                0x0000000000000252                uart_getByte
+ .text.adc_init
+                0x0000000000000260       0x22 main.o
+                0x0000000000000260                adc_init
+ .text.init_ports
+                0x0000000000000282       0x16 main.o
+                0x0000000000000282                init_ports
+ .text.init_timer
+                0x0000000000000298        0xc main.o
+                0x0000000000000298                init_timer
+ .text.init_ext_int
+                0x00000000000002a4        0xc main.o
+                0x00000000000002a4                init_ext_int
+ .text.getAdcValue
+                0x00000000000002b0       0x30 main.o
+                0x00000000000002b0                getAdcValue
+ .text.checkTempLimit
+                0x00000000000002e0       0x48 main.o
+                0x00000000000002e0                checkTempLimit
+ .text.checkLightLimit
+                0x0000000000000328       0x4a main.o
+                0x0000000000000328                checkLightLimit
+ .text.getTemp  0x0000000000000372        0xa main.o
+                0x0000000000000372                getTemp
+ .text.getTempLimit
+                0x000000000000037c        0x8 main.o
+                0x000000000000037c                getTempLimit
+ .text.getLight
+                0x0000000000000384        0xa main.o
+                0x0000000000000384                getLight
+ .text.getLightLimit
+                0x000000000000038e        0xc main.o
+                0x000000000000038e                getLightLimit
+ .text.getMaxDownLimit
+                0x000000000000039a        0xc main.o
+                0x000000000000039a                getMaxDownLimit
+ .text.getMinDownLimit
+                0x00000000000003a6        0xc main.o
+                0x00000000000003a6                getMinDownLimit
+ .text.getCurrentState
+                0x00000000000003b2        0x8 main.o
+                0x00000000000003b2                getCurrentState
+ .text.setTempLimit
+                0x00000000000003ba       0x16 main.o
+                0x00000000000003ba                setTempLimit
+ .text.setLightLimit
+                0x00000000000003d0       0x26 main.o
+                0x00000000000003d0                setLightLimit
+ .text.setMaxDownLimit
+                0x00000000000003f6       0x2e main.o
+                0x00000000000003f6                setMaxDownLimit
+ .text.setMinDownLimit
+                0x0000000000000424       0x2e main.o
+                0x0000000000000424                setMinDownLimit
+ .text.redLightOn
+                0x0000000000000452        0x4 main.o
+                0x0000000000000452                redLightOn
+ .text.greenLightOn
+                0x0000000000000456        0x4 main.o
+                0x0000000000000456                greenLightOn
+ .text.getCurrentDistance
+                0x000000000000045a        0xc main.o
+                0x000000000000045a                getCurrentDistance
+ .text.startup.main
+                0x0000000000000466      0x120 main.o
+                0x0000000000000466                main
+ .text.__vector_2
+                0x0000000000000586       0x42 main.o
+                0x0000000000000586                __vector_2
+ .text.__vector_18
+                0x00000000000005c8      0x152 main.o
+                0x00000000000005c8                __vector_18
+ .text.libgcc   0x000000000000071a        0xc /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+                0x000000000000071a                __tablejump2__
+                0x0000000000000726                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x0000000000000726        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000726                exit
+                0x0000000000000726                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x0000000000000726        0x4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ *(.fini0)
+                0x000000000000072a                _etext = .
+
+.data           0x0000000000800100        0x8 load address 0x000000000000072a
+                0x0000000000800100                PROVIDE (__data_start, .)
+ *(.data)
+ *(.data*)
+ .data._state   0x0000000000800100        0x1 main.o
+                0x0000000000800100                _state
+ .data._minDownLimit
+                0x0000000000800101        0x2 main.o
+                0x0000000000800101                _minDownLimit
+ .data._maxDownLimit
+                0x0000000000800103        0x2 main.o
+                0x0000000000800103                _maxDownLimit
+ .data._lightLimit
+                0x0000000000800105        0x2 main.o
+                0x0000000000800105                _lightLimit
+ .data._tempLimit
+                0x0000000000800107        0x1 main.o
+                0x0000000000800107                _tempLimit
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x0000000000800108                . = ALIGN (0x2)
+                0x0000000000800108                _edata = .
+                0x0000000000800108                PROVIDE (__data_end, .)
+
+.bss            0x0000000000800108       0x2c
+                0x0000000000800108                PROVIDE (__bss_start, .)
+ *(.bss)
+ *(.bss*)
+ .bss._distanceValue
+                0x0000000000800108        0x2 main.o
+                0x0000000000800108                _distanceValue
+ .bss._currentMode
+                0x000000000080010a        0x1 main.o
+                0x000000000080010a                _currentMode
+ .bss._blinking
+                0x000000000080010b        0x1 main.o
+                0x000000000080010b                _blinking
+ *(COMMON)
+ COMMON         0x000000000080010c       0x23 AVR_TTC_scheduler.o
+                0x000000000080010c                SCH_tasks_G
+ COMMON         0x000000000080012f        0x5 main.o
+                0x000000000080012f                _echo
+                0x0000000000800130                _gv_counter
+                0x0000000000800132                adc_value
+                0x0000000000800134                PROVIDE (__bss_end, .)
+                0x000000000000072a                __data_load_start = LOADADDR (.data)
+                0x0000000000000732                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x0000000000800134        0x0
+                0x0000000000800134                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x0000000000800134                PROVIDE (__noinit_end, .)
+                0x0000000000800134                _end = .
+                0x0000000000800134                PROVIDE (__heap_start, .)
+
+.eeprom         0x0000000000810000        0x0
+ *(.eeprom*)
+                0x0000000000810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab           0x0000000000000000     0x1fb0
+ *(.stab)
+ .stab          0x0000000000000000      0x864 AVR_TTC_scheduler.o
+ .stab          0x0000000000000864     0x14b8 main.o
+                                       0x1800 (size before relaxing)
+ .stab          0x0000000000001d1c       0x6c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+                                         0x78 (size before relaxing)
+ .stab          0x0000000000001d88       0x9c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+                                         0xa8 (size before relaxing)
+ .stab          0x0000000000001e24       0xd8 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+                                         0xe4 (size before relaxing)
+ .stab          0x0000000000001efc       0xb4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+                                         0xc0 (size before relaxing)
+
+.stabstr        0x0000000000000000     0x15d1
+ *(.stabstr)
+ .stabstr       0x0000000000000000     0x15d1 AVR_TTC_scheduler.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x0000000000000000       0x11
+ *(.comment)
+ .comment       0x0000000000000000       0x11 AVR_TTC_scheduler.o
+                                         0x12 (size before relaxing)
+ .comment       0x0000000000000011       0x12 main.o
+
+.note.gnu.avr.deviceinfo
+                0x0000000000000000       0x40
+ .note.gnu.avr.deviceinfo
+                0x0000000000000000       0x40 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+
+.note.gnu.build-id
+ *(.note.gnu.build-id)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x0000000000000000      0x5f4
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x0000000000000000      0x5f4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+
+.debug_abbrev   0x0000000000000000      0x5a2
+ *(.debug_abbrev)
+ .debug_abbrev  0x0000000000000000      0x5a2 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+
+.debug_line     0x0000000000000000       0x1d
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x0000000000000000       0x1d /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str      0x0000000000000000      0x208
+ *(.debug_str)
+ .debug_str     0x0000000000000000      0x208 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges
+ *(.debug_ranges)
+
+.debug_macro
+ *(.debug_macro)
+OUTPUT(control-units.elf elf32-avr)
+LOAD linker stubs

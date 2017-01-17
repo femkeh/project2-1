@@ -5,7 +5,7 @@ from BottomController import *
 
 class Element:
 	def __init__(self, parentframe, naam, unit, s):
-		self.elementCanvas=Canvas(parentframe, width=1000, height=450) # border om element?
+		self.elementCanvas=Canvas(parentframe, width=1000, height=450) 
 		self.elementCanvas.pack()
 		self.naam = naam
 		self.unit=unit
