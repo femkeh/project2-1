@@ -5,7 +5,6 @@
  *  Author:
  */
 
- // Set light limit doet et niet, moet tussen de 0 - 255 zijn, maar is niet reeel. Hoe kan dat groter?
 
 #define F_CPU 16000000UL
 #define BAUD 19200
@@ -24,13 +23,13 @@
 // Global variables, maar gehardcode dus als setters gebruikt worden dan is dat alleen in zelfde connectie, wordt niet opgeslagen
 uint8_t _tempLimit = 174;
 
-uint16_t _lightLimit = 600;
+uint16_t _lightLimit = 500;
 
 uint8_t _maxDownLimit = 100;
 
 uint8_t _minDownLimit = 5;
 
-uint8_t _currentMode = 0; // not manual
+uint8_t _currentMode = 0; // not manual = 0, manual = 1
 
 uint8_t _state = 1; //ROLLED_UP = 1, ROLLED_DOWN = 0
 
@@ -44,12 +43,12 @@ void uart_init(void) {
 	UBRR0H = UBRRH_VALUE;
 	UBRR0L = UBRRL_VALUE;
 	UCSR0A =0;
-	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); /* 8-bit data */
-	UCSR0B = _BV(RXEN0) | _BV(TXEN0);   /* Enable RX and TX */
+	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); // 8-bit data 
+	UCSR0B = _BV(RXEN0) | _BV(TXEN0);   // Enable RX and TX 
 }
 
 void uart_putByte(uint8_t c) {
-    loop_until_bit_is_set(UCSR0A, UDRE0); /* Wait until data register empty. */
+    loop_until_bit_is_set(UCSR0A, UDRE0); // Wait until data register empty
     UDR0 = c;
 }
 
@@ -59,7 +58,7 @@ void uart_putDouble(uint16_t word) {
 }
 
 char uart_getByte() {
-    loop_until_bit_is_set(UCSR0A, RXC0); /* Wait until data exists. */
+    loop_until_bit_is_set(UCSR0A, RXC0); // Wait until data exists 
     return UDR0;
 }
 
@@ -68,7 +67,7 @@ void adc_init() {
     ADMUX |= (1<<REFS0);                            // set ref voltage to AVCC
     ADCSRA |= (1<<ADEN);                            // ADC Enable
 
-    ADCSRA |= (1<<ADSC);                            // start sampling                       // start sampling
+    ADCSRA |= (1<<ADSC);                            // start sampling                       
 }
 
 void init_ports() {

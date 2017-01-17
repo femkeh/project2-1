@@ -88,9 +88,9 @@ class SideController():
 		# if self.s[0:3]=='RES': i=10
 		self.unit.getCommand(50) # set blinking / change state
 		# update status
-		status=""
 		while (self.unit.getCommand(29)):
-			print("is blinking, block python")
+			blink = True
+
 		# update status
 		status=""
 		statusValue = self.unit.getCommand(27) #"Rolled down" ######
@@ -119,31 +119,29 @@ class SideController():
 		# if self.s[0:3]=='RES': i=10
 		self.unit.getCommand(50) # set blinking / change state
 		# update status
-		status=""
 		while (self.unit.getCommand(29)):
-			print("is blinking, block python")
+			blink = True
 
+		status=""
 		statusValue = self.unit.getCommand(27) #"Rolled down" ######
 		if statusValue == 0:
 			status = "Rolled down"
-			print("statusValue down: ", statusValue)
 			self.buttonDown.config(state=DISABLED)
 			self.buttonUp.config(state=NORMAL)
 		else:
 			status = "Rolled up"
 			self.buttonUp.config(state=DISABLED)
-			print("statusValue up: ", statusValue)
 			self.buttonDown.config(state=NORMAL)
 		self.canvas.delete("status")
 		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
 
-	def screenStop(self):
-		self.s="stop"
-		self.unit.write(self.s.encode('ascii'))
-		self.unit.write('\n'.encode('ascii'))
-		i=0
-		while i<3:
-			self.s=self.unit.readline().decode('ascii').strip()
-			i+=1
-			#print(s[0:3])
-		if self.s[0:3]=='RES': i=10
+	# def screenStop(self):
+	# 	self.s="stop"
+	# 	self.unit.write(self.s.encode('ascii'))
+	# 	self.unit.write('\n'.encode('ascii'))
+	# 	i=0
+	# 	while i<3:
+	# 		self.s=self.unit.readline().decode('ascii').strip()
+	# 		i+=1
+	# 		#print(s[0:3])
+	# 	if self.s[0:3]=='RES': i=10
