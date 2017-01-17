@@ -76,7 +76,7 @@ class BottomController():
 				self.lightEntry.delete(0,END)
 				self.textLight.destroy()
 				self.textLight = Label(self.canvas, text=self.lightLimitValue)
-				self.textLight_window = self.canvas.create_window(112, 428, window=self.textLight)
+				self.textLight_window = self.canvas.create_window(132, 428, window=self.textLight)
 
 			except ValueError:
 				pass

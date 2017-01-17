@@ -219,7 +219,7 @@ void checkTempAndLightLimit() {
         if ((_state == 1) && (getAdcValue(1) >= _tempLimit || getAdcValue(0) >= _lightLimit)) {
             blinkYellowLed();
         }
-        if ((getAdcValue(1) <= _tempLimit) && (getAdcValue(0) <= _lightLimit) && (_state == 0)) {
+        else if ((getAdcValue(1) <= _tempLimit && getAdcValue(0) <= _lightLimit) && (_state == 0)) {
             blinkYellowLed();
         }
     }
