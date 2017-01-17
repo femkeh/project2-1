@@ -1,8 +1,8 @@
 /*
  * GccApplication6.c
  *
- * Created: 3-11-2016 16:46:41
- *  Author:
+ * 
+ *  Author: o.a. Femke Hoornveld met code uit opdrachten van week 4 Assembly&C
  */
 
 
@@ -21,13 +21,13 @@
 #define high(x)   (((x)>>8) & 0xFF)
 
 // Global variables, maar gehardcode dus als setters gebruikt worden dan is dat alleen in zelfde connectie, wordt niet opgeslagen
-uint8_t _tempLimit = 174;
+uint8_t _tempLimit = 174; // 35 graden
 
 uint16_t _lightLimit = 500;
 
-uint8_t _blinking = 0;
+uint8_t _blinking = 0; // false = 0, true = 1
 
-uint16_t _maxDownLimit = 200; // 100cm = 100 / 15 * 60 = 400, 50 cm = 50 / 15 * 60 = 200
+uint16_t _maxDownLimit = 240; // 100cm = 100 / 15 * 60 = 400, 60 cm = 50 / 15 * 60 = 240
 
 uint16_t _minDownLimit = 40; // 10cm = 10 / 15 * 60
 
@@ -47,7 +47,7 @@ void uart_init(void) {
 	UBRR0H = UBRRH_VALUE;
 	UBRR0L = UBRRL_VALUE;
 	UCSR0A =0;
-	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00); // 8-bit data 
+	UCSR0C = _BV(UCSZ01) | _BV(UCSZ00);  
 	UCSR0B = _BV(RXEN0) | _BV(TXEN0);   // Enable RX and TX 
 }
 
@@ -77,14 +77,14 @@ void adc_init() {
 void init_ports() {
     DDRB = 0xff; // set port B as output
     PORTB = 0x00; // LEDs off
-    DDRD &= ~(1 << PIND3);
-	DDRD |= (1 << PIND2);
+    DDRD &= ~(1 << PIND3); // echo output
+	DDRD |= (1 << PIND2); // trigger input
     PORTD = 0x00;
     _delay_us(2);
 }
 
 void init_timer(void)
-// prescale, no interrupt, counting up
+// prescale, no interrupt, counting up, uit opdracht week 4 Assembly&C
 {
     // prescaling : max time = 2^16/16E6 = 4.1 ms, 4.1 >> 2.3, so no prescaling required
     TCCR1A = 0;
@@ -99,10 +99,9 @@ void init_ext_int(void)
 }
 
 uint16_t getAdcValue(uint8_t channel) {
-    // Returns 8 bit reading (left justified)
+    // Returns 8 bit
         uint16_t adcVal = 0;
         ADMUX &= ~((1<<MUX3)|(1<<MUX2)|(1<<MUX1)|(1<<MUX0)); // Clear ADC Mux Bits
-        // read from channel [PC1, A1]
             ADMUX |= channel;                             // setup ADC Channel 1
             ADCSRA |= (1 << ADSC);                          // Start a new conversion,
             while(ADCSRA & _BV(ADSC));                      // Wait until conversion is complete and ADSC is cleared
@@ -138,7 +137,6 @@ void getMinDownLimit() {
 }
 
 void getCurrentState() {
-    // _delay_ms()
     uart_putByte(_state);
 }
 
@@ -197,7 +195,7 @@ void setManualToMode() {
 }
 
 void blinkYellowLed() {
-    _blinking = 1; // true, = 0 -> false
+    _blinking = 1; // true, 0 = false
 }
 
 void redLightOn() {
@@ -214,6 +212,17 @@ void greenLightOn() {
 
 void greenLightOff() {
     PORTB=0x00;  // is alle poorten D uit..
+}
+
+void checkTempAndLightLimit() {
+    if (_currentMode == 0) {
+        if ((_state == 1) && (getAdcValue(1) >= _tempLimit || getAdcValue(0) >= _lightLimit)) {
+            blinkYellowLed();
+        }
+        if ((getAdcValue(1) <= _tempLimit) && (getAdcValue(0) <= _lightLimit) && (_state == 0)) {
+            blinkYellowLed();
+        }
+    }
 }
 
 void checkTempLimit() {
@@ -239,6 +248,7 @@ void checkLightLimit() {
 }
 
 void checkDistanceMeter() {
+    // Uit opdrachten week 4 Assembly&C
     _echo = 0x1; // set flag
     // start trigger puls lo -> hi
     PORTD |= _BV(PIND2); // set bit D2
@@ -273,11 +283,10 @@ int main(void) {
     // Enable the USART Recieve Complete interrupt (USART_RXC)
     UCSR0B |= (1 << RXCIE0);
 
-    // test ADC
-    // SCH_Add_Task(getTemp, 0, 50);
-    // SCH_Add_Task(getLight, 0, 100);
-    SCH_Add_Task(checkTempLimit, 0, 10);
-    SCH_Add_Task(checkLightLimit, 0, 10);
+    // Add tasks to the task dispatcher
+    // SCH_Add_Task(checkTempLimit, 0, 10);
+    // SCH_Add_Task(checkLightLimit, 0, 10);
+    SCH_Add_Task(checkTempAndLightLimit, 0, 10);
     SCH_Add_Task(checkDistanceMeter, 0, 50);
 
     sei();
@@ -288,19 +297,20 @@ int main(void) {
 
             if (_state == 0) {
                 while (_distanceValue <= _maxDownLimit) {
-                    PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
+                    PORTB |= _BV(PORTB2); // LED on
                     // delay 0.5 sec
                     _delay_ms(500);
                     PORTB=0x00; // led off
                     // delay 0.5 sec
                     _delay_ms(500);
+                    // both delays to make it blink per second
                     checkDistanceMeter();
                 }
                 _state = 1;
                 redLightOn();
             } else {
                 while (_distanceValue >= _minDownLimit) {
-                    PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
+                    PORTB |= _BV(PORTB2); // LEDs on
                     // delay 0.5 sec
                     _delay_ms(500);
                     PORTB=0x00; // led off
@@ -333,7 +343,7 @@ ISR (INT1_vect)
 ISR (USART_RX_vect)
 {
   char receivedByte;
-  receivedByte = uart_getByte(); // Fetch the received byte value into the variable "ByteReceived"
+  receivedByte = uart_getByte(); // Get the received byte
   uint8_t collectMore = 0;
 
 
@@ -352,7 +362,7 @@ ISR (USART_RX_vect)
 
         case 23:
         // getLight
-        uart_putByte(13); // MOET DIT GEHARDCODE BLIJVEN?
+        uart_putByte(13); 
         getLight();
         break;
 

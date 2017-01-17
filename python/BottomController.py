@@ -72,7 +72,7 @@ class BottomController():
 			try:
 				#self.lightLimitValue = self.lightEntry.get()
 				self.unit.setLightLimit(self.lightEntry.get())
-				self.lightLimitValue = str(self.unit.getLightLimit()) + " Lux"
+				self.lightLimitValue = str(self.unit.getLightLimit()) + " Lichtint."
 				self.lightEntry.delete(0,END)
 				self.textLight.destroy()
 				self.textLight = Label(self.canvas, text=self.lightLimitValue)

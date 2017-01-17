@@ -84,8 +84,9 @@ class SideController():
 			status = "Rolled up"
 			self.buttonUp.config(state=DISABLED)
 			self.buttonDown.config(state=NORMAL)
-		self.canvas.delete("status")
-		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
+		# onderstaande weggecomment omdat hij leek dubbel de status neer te zetten, dit ook omdat klasse Update al zijn werk doet
+		# self.canvas.delete("status")
+		# self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
 
 
 	def screenDown(self):
@@ -105,8 +106,9 @@ class SideController():
 			status = "Rolled up"
 			self.buttonUp.config(state=DISABLED)
 			self.buttonDown.config(state=NORMAL)
-		self.canvas.delete("status")
-		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
+		# onderstaande weggecomment omdat hij leek dubbel de status neer te zetten, dit ook omdat klasse Update al zijn werk doet
+		# self.canvas.delete("status")
+		# self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag="status")
 
 	# def screenStop(self):
 	# 	self.s="stop"
