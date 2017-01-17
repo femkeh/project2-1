@@ -32,6 +32,8 @@ Discarded input sections
                 0x0000000000000000        0x8 main.o
  .text.setManualToMode
                 0x0000000000000000        0x6 main.o
+ .text.blinkYellowLed
+                0x0000000000000000        0x8 main.o
  .text.redLightOff
                 0x0000000000000000        0x4 main.o
  .text.greenLightOff
@@ -210,7 +212,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x64a
+.text           0x0000000000000000      0x6fe
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
                 0x0000000000000000                __vectors
@@ -342,73 +344,70 @@ END GROUP
  .text.getAdcValue
                 0x00000000000002f4       0x30 main.o
                 0x00000000000002f4                getAdcValue
- .text.getTemp  0x0000000000000324        0xa main.o
-                0x0000000000000324                getTemp
- .text.getTempLimit
-                0x000000000000032e        0x8 main.o
-                0x000000000000032e                getTempLimit
- .text.getLight
-                0x0000000000000336        0xa main.o
-                0x0000000000000336                getLight
- .text.getLightLimit
-                0x0000000000000340        0xc main.o
-                0x0000000000000340                getLightLimit
- .text.getMaxDownLimit
-                0x000000000000034c        0x8 main.o
-                0x000000000000034c                getMaxDownLimit
- .text.getMinDownLimit
-                0x0000000000000354        0x8 main.o
-                0x0000000000000354                getMinDownLimit
- .text.getCurrentState
-                0x000000000000035c        0x8 main.o
-                0x000000000000035c                getCurrentState
- .text.setTempLimit
-                0x0000000000000364       0x16 main.o
-                0x0000000000000364                setTempLimit
- .text.setLightLimit
-                0x000000000000037a       0x26 main.o
-                0x000000000000037a                setLightLimit
- .text.setMaxDownLimit
-                0x00000000000003a0       0x16 main.o
-                0x00000000000003a0                setMaxDownLimit
- .text.setMinDownLimit
-                0x00000000000003b6       0x16 main.o
-                0x00000000000003b6                setMinDownLimit
- .text.redLightOn
-                0x00000000000003cc        0x4 main.o
-                0x00000000000003cc                redLightOn
- .text.greenLightOn
-                0x00000000000003d0        0x4 main.o
-                0x00000000000003d0                greenLightOn
- .text.blinkYellowLed
-                0x00000000000003d4       0x50 main.o
-                0x00000000000003d4                blinkYellowLed
  .text.checkTempLimit
-                0x0000000000000424       0x28 main.o
-                0x0000000000000424                checkTempLimit
+                0x0000000000000324       0x28 main.o
+                0x0000000000000324                checkTempLimit
  .text.checkLightLimit
-                0x000000000000044c       0x28 main.o
-                0x000000000000044c                checkLightLimit
+                0x000000000000034c       0x28 main.o
+                0x000000000000034c                checkLightLimit
+ .text.getTemp  0x0000000000000374        0xa main.o
+                0x0000000000000374                getTemp
+ .text.getTempLimit
+                0x000000000000037e        0x8 main.o
+                0x000000000000037e                getTempLimit
+ .text.getLight
+                0x0000000000000386        0xa main.o
+                0x0000000000000386                getLight
+ .text.getLightLimit
+                0x0000000000000390        0xc main.o
+                0x0000000000000390                getLightLimit
+ .text.getMaxDownLimit
+                0x000000000000039c        0xc main.o
+                0x000000000000039c                getMaxDownLimit
+ .text.getMinDownLimit
+                0x00000000000003a8        0xc main.o
+                0x00000000000003a8                getMinDownLimit
+ .text.getCurrentState
+                0x00000000000003b4        0x8 main.o
+                0x00000000000003b4                getCurrentState
+ .text.setTempLimit
+                0x00000000000003bc       0x16 main.o
+                0x00000000000003bc                setTempLimit
+ .text.setLightLimit
+                0x00000000000003d2       0x26 main.o
+                0x00000000000003d2                setLightLimit
+ .text.setMaxDownLimit
+                0x00000000000003f8       0x2e main.o
+                0x00000000000003f8                setMaxDownLimit
+ .text.setMinDownLimit
+                0x0000000000000426       0x2e main.o
+                0x0000000000000426                setMinDownLimit
+ .text.redLightOn
+                0x0000000000000454        0x4 main.o
+                0x0000000000000454                redLightOn
+ .text.greenLightOn
+                0x0000000000000458        0x4 main.o
+                0x0000000000000458                greenLightOn
  .text.getCurrentDistance
-                0x0000000000000474        0xc main.o
-                0x0000000000000474                getCurrentDistance
+                0x000000000000045c        0xc main.o
+                0x000000000000045c                getCurrentDistance
  .text.startup.main
-                0x0000000000000480       0x70 main.o
-                0x0000000000000480                main
+                0x0000000000000468      0x12e main.o
+                0x0000000000000468                main
  .text.__vector_2
-                0x00000000000004f0       0x42 main.o
-                0x00000000000004f0                __vector_2
+                0x0000000000000596       0x42 main.o
+                0x0000000000000596                __vector_2
  .text.__vector_18
-                0x0000000000000532      0x108 main.o
-                0x0000000000000532                __vector_18
- .text.libgcc   0x000000000000063a        0xc /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_tablejump.o)
-                0x000000000000063a                __tablejump2__
-                0x000000000000063e                __tablejump__
-                0x0000000000000646                . = ALIGN (0x2)
+                0x00000000000005d8      0x116 main.o
+                0x00000000000005d8                __vector_18
+ .text.libgcc   0x00000000000006ee        0xc /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_tablejump.o)
+                0x00000000000006ee                __tablejump2__
+                0x00000000000006f2                __tablejump__
+                0x00000000000006fa                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000646        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
-                0x0000000000000646                exit
-                0x0000000000000646                _exit
+ .fini9         0x00000000000006fa        0x0 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+                0x00000000000006fa                exit
+                0x00000000000006fa                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -427,11 +426,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000646        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000006fa        0x4 /usr/lib/gcc/avr/4.8.1/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x000000000000064a                _etext = .
+                0x00000000000006fe                _etext = .
 
-.data           0x0000000000800100        0x6 load address 0x000000000000064a
+.data           0x0000000000800100        0x8 load address 0x00000000000006fe
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/4.8.1/../../../avr/lib/avr5/crtm328p.o
@@ -445,51 +444,54 @@ END GROUP
  .data._state   0x0000000000800100        0x1 main.o
                 0x0000000000800100                _state
  .data._minDownLimit
-                0x0000000000800101        0x1 main.o
+                0x0000000000800101        0x2 main.o
                 0x0000000000800101                _minDownLimit
  .data._maxDownLimit
-                0x0000000000800102        0x1 main.o
-                0x0000000000800102                _maxDownLimit
- .data._lightLimit
                 0x0000000000800103        0x2 main.o
-                0x0000000000800103                _lightLimit
+                0x0000000000800103                _maxDownLimit
+ .data._lightLimit
+                0x0000000000800105        0x2 main.o
+                0x0000000000800105                _lightLimit
  .data._tempLimit
-                0x0000000000800105        0x1 main.o
-                0x0000000000800105                _tempLimit
+                0x0000000000800107        0x1 main.o
+                0x0000000000800107                _tempLimit
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x0000000000800106                . = ALIGN (0x2)
-                0x0000000000800106                _edata = .
-                0x0000000000800106                PROVIDE (__data_end, .)
+                0x0000000000800108                . = ALIGN (0x2)
+                0x0000000000800108                _edata = .
+                0x0000000000800108                PROVIDE (__data_end, .)
 
-.bss            0x0000000000800106       0x2b
-                0x0000000000800106                PROVIDE (__bss_start, .)
+.bss            0x0000000000800108       0x2c
+                0x0000000000800108                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss._distanceValue
-                0x0000000000800106        0x2 main.o
-                0x0000000000800106                _distanceValue
+                0x0000000000800108        0x2 main.o
+                0x0000000000800108                _distanceValue
  .bss._currentMode
-                0x0000000000800108        0x1 main.o
-                0x0000000000800108                _currentMode
+                0x000000000080010a        0x1 main.o
+                0x000000000080010a                _currentMode
+ .bss._blinking
+                0x000000000080010b        0x1 main.o
+                0x000000000080010b                _blinking
  *(COMMON)
- COMMON         0x0000000000800109       0x23 AVR_TTC_scheduler.o
-                0x0000000000800109                SCH_tasks_G
- COMMON         0x000000000080012c        0x5 main.o
-                0x000000000080012c                _echo
-                0x000000000080012d                _gv_counter
-                0x000000000080012f                adc_value
-                0x0000000000800131                PROVIDE (__bss_end, .)
-                0x000000000000064a                __data_load_start = LOADADDR (.data)
-                0x0000000000000650                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x000000000080010c       0x23 AVR_TTC_scheduler.o
+                0x000000000080010c                SCH_tasks_G
+ COMMON         0x000000000080012f        0x5 main.o
+                0x000000000080012f                _echo
+                0x0000000000800130                _gv_counter
+                0x0000000000800132                adc_value
+                0x0000000000800134                PROVIDE (__bss_end, .)
+                0x00000000000006fe                __data_load_start = LOADADDR (.data)
+                0x0000000000000706                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0000000000800131        0x0
-                0x0000000000800131                PROVIDE (__noinit_start, .)
+.noinit         0x0000000000800134        0x0
+                0x0000000000800134                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0000000000800131                PROVIDE (__noinit_end, .)
-                0x0000000000800131                _end = .
-                0x0000000000800131                PROVIDE (__heap_start, .)
+                0x0000000000800134                PROVIDE (__noinit_end, .)
+                0x0000000000800134                _end = .
+                0x0000000000800134                PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)
@@ -510,15 +512,15 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000     0x1bc0
+.stab           0x0000000000000000     0x1cb0
  *(.stab)
  .stab          0x0000000000000000      0x864 AVR_TTC_scheduler.o
- .stab          0x0000000000000864     0x135c main.o
-                                       0x1698 (size before relaxing)
+ .stab          0x0000000000000864     0x144c main.o
+                                       0x17c4 (size before relaxing)
 
-.stabstr        0x0000000000000000     0x13bd
+.stabstr        0x0000000000000000     0x13c3
  *(.stabstr)
- .stabstr       0x0000000000000000     0x13bd AVR_TTC_scheduler.o
+ .stabstr       0x0000000000000000     0x13c3 AVR_TTC_scheduler.o
 
 .stab.excl
  *(.stab.excl)

@@ -26,9 +26,11 @@ uint8_t _tempLimit = 174;
 
 uint16_t _lightLimit = 600;
 
-uint8_t _maxDownLimit = 100;
+uint8_t _blinking = 0;
 
-uint8_t _minDownLimit = 5;
+uint16_t _maxDownLimit = 400; // 100cm = 100 / 15 * 60
+
+uint16_t _minDownLimit = 40; // 10cm = 10 / 15 * 60
 
 uint8_t _currentMode = 0; // not manual
 
@@ -39,6 +41,8 @@ int adc_value;        // Variable used to store the value read from the ADC conv
 uint16_t _distanceValue = 0; // distancesensor last measurement
 volatile uint16_t _gv_counter; // 16 bit
 volatile uint8_t _echo; // a flag
+
+void checkDistanceMeter();
 
 void uart_init(void) {
 	UBRR0H = UBRRH_VALUE;
@@ -127,14 +131,15 @@ void getLightLimit() {
 }
 
 void getMaxDownLimit() {
-    uart_putByte(_maxDownLimit);
+    uart_putDouble(_maxDownLimit);
 }
 
 void getMinDownLimit() {
-    uart_putByte(_minDownLimit);
+    uart_putDouble(_minDownLimit);
 }
 
 void getCurrentState() {
+    // _delay_ms()
     uart_putByte(_state);
 }
 
@@ -157,20 +162,22 @@ void setLightLimit() {
 }
 
 void setMaxDownLimit() {
-    _maxDownLimit = uart_getByte();
+    uint8_t msb = uart_getByte();
+    _maxDownLimit = (msb << 8)|uart_getByte();
       if (_maxDownLimit <= 0) {
         uart_putByte(2);
       } else {
-        uart_putByte(12);
+        uart_putByte(11);
       }
 }
 
 void setMinDownLimit() {
-    _minDownLimit = uart_getByte();
+    uint8_t msb = uart_getByte();
+    _minDownLimit = (msb << 8)|uart_getByte();
       if (_minDownLimit <= 0) {
         uart_putByte(2);
       } else {
-        uart_putByte(12);
+        uart_putByte(11);
       }
 }
 
@@ -191,25 +198,7 @@ void setManualToMode() {
 }
 
 void blinkYellowLed() {
-    uint8_t max = _maxDownLimit;
-    redLightOff();
-    while (max > 0) {
-        PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
-        // delay 0.5 sec
-        _delay_ms(500);
-        PORTB=0x00; // led off
-        // delay 0.5 sec
-        _delay_ms(500);
-        max = max - 10; // remove 10 cms
-    }
-    if (_state == 0) {
-        _state = 1;
-        redLightOn();
-    }
-    else {
-        _state = 0;
-        greenLightOn();
-    }
+    _blinking = 1; // true
 }
 
 void redLightOn() {
@@ -289,6 +278,36 @@ int main(void) {
     sei();
     while (1) {
         SCH_Dispatch_Tasks();
+        if (_blinking) {
+            redLightOff();
+
+            if (_state == 0) {
+                while (_distanceValue >= (_maxDownLimit - _minDownLimit)) {
+                    PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
+                    // delay 0.5 sec
+                    _delay_ms(500);
+                    PORTB=0x00; // led off
+                    // delay 0.5 sec
+                    _delay_ms(500);
+                    checkDistanceMeter();
+                }
+                _state = 1;
+                redLightOn();
+            } else {
+                while (_distanceValue >= _minDownLimit) {
+                    PORTB |= _BV(PORTB2);// PORTB=0x0f; // LEDs on
+                    // delay 0.5 sec
+                    _delay_ms(500);
+                    PORTB=0x00; // led off
+                    // delay 0.5 sec
+                    _delay_ms(500);
+                    checkDistanceMeter();
+                }
+                _state = 0;
+                greenLightOn();
+            }
+            _blinking = 0;
+        }
     }
     return 0;
 }
@@ -340,13 +359,13 @@ ISR (USART_RX_vect)
 
         case 25:
         // getMaxDownLimit
-        uart_putByte(12);
+        uart_putByte(13);
         getMaxDownLimit();
         break;
 
         case 26:
         // getMinDownLimit
-        uart_putByte(12);
+        uart_putByte(13);
         getMinDownLimit();
         break;
 
@@ -360,6 +379,12 @@ ISR (USART_RX_vect)
         // getCurrentDistance
         uart_putByte(13);
         getCurrentDistance();
+        break;
+
+        case 29:
+        // isCurrentlyBlinking
+        uart_putByte(12);
+        uart_putByte(_blinking);
         break;
 
         // 41-46
