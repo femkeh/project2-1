@@ -216,10 +216,16 @@ void greenLightOff() {
 
 void checkTempAndLightLimit() {
     if (_currentMode == 0) {
-        if ((_state == 1) && (getAdcValue(1) >= _tempLimit || getAdcValue(0) >= _lightLimit)) {
+        uint16_t light = getAdcValue(0);
+        uint8_t temp = getAdcValue(1);
+        if ((_state == 1) && (temp >= _tempLimit || light >= _lightLimit)) {
+            // uart_putByte(0xff);
+            // uart_putByte(temp);
             blinkYellowLed();
         }
-        else if ((getAdcValue(1) <= _tempLimit && getAdcValue(0) <= _lightLimit) && (_state == 0)) {
+        else if (((temp <= _tempLimit) && (light <= _lightLimit)) && (_state == 0)) {
+            // uart_putByte(0x01);
+            // uart_putByte(temp);
             blinkYellowLed();
         }
     }
@@ -286,7 +292,7 @@ int main(void) {
     // Add tasks to the task dispatcher
     // SCH_Add_Task(checkTempLimit, 0, 10);
     // SCH_Add_Task(checkLightLimit, 0, 10);
-    SCH_Add_Task(checkTempAndLightLimit, 0, 10);
+    SCH_Add_Task(checkTempAndLightLimit, 0, 100);
     SCH_Add_Task(checkDistanceMeter, 0, 50);
 
     sei();

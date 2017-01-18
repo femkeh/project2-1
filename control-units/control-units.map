@@ -223,7 +223,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x6f4
+.text           0x0000000000000000      0x6e2
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/../../../../avr/lib/avr5/crtatmega328p.o
                 0x0000000000000000                __vectors
@@ -354,65 +354,65 @@ END GROUP
                 0x00000000000002b0       0x30 main.o
                 0x00000000000002b0                getAdcValue
  .text.checkTempAndLightLimit
-                0x00000000000002e0       0x6c main.o
+                0x00000000000002e0       0x5a main.o
                 0x00000000000002e0                checkTempAndLightLimit
- .text.getTemp  0x000000000000034c        0xa main.o
-                0x000000000000034c                getTemp
+ .text.getTemp  0x000000000000033a        0xa main.o
+                0x000000000000033a                getTemp
  .text.getTempLimit
-                0x0000000000000356        0x8 main.o
-                0x0000000000000356                getTempLimit
+                0x0000000000000344        0x8 main.o
+                0x0000000000000344                getTempLimit
  .text.getLight
-                0x000000000000035e        0xa main.o
-                0x000000000000035e                getLight
+                0x000000000000034c        0xa main.o
+                0x000000000000034c                getLight
  .text.getLightLimit
-                0x0000000000000368        0xc main.o
-                0x0000000000000368                getLightLimit
+                0x0000000000000356        0xc main.o
+                0x0000000000000356                getLightLimit
  .text.getMaxDownLimit
-                0x0000000000000374        0xc main.o
-                0x0000000000000374                getMaxDownLimit
+                0x0000000000000362        0xc main.o
+                0x0000000000000362                getMaxDownLimit
  .text.getMinDownLimit
-                0x0000000000000380        0xc main.o
-                0x0000000000000380                getMinDownLimit
+                0x000000000000036e        0xc main.o
+                0x000000000000036e                getMinDownLimit
  .text.getCurrentState
-                0x000000000000038c        0x8 main.o
-                0x000000000000038c                getCurrentState
+                0x000000000000037a        0x8 main.o
+                0x000000000000037a                getCurrentState
  .text.setTempLimit
-                0x0000000000000394       0x16 main.o
-                0x0000000000000394                setTempLimit
+                0x0000000000000382       0x16 main.o
+                0x0000000000000382                setTempLimit
  .text.setLightLimit
-                0x00000000000003aa       0x26 main.o
-                0x00000000000003aa                setLightLimit
+                0x0000000000000398       0x26 main.o
+                0x0000000000000398                setLightLimit
  .text.setMaxDownLimit
-                0x00000000000003d0       0x2e main.o
-                0x00000000000003d0                setMaxDownLimit
+                0x00000000000003be       0x2e main.o
+                0x00000000000003be                setMaxDownLimit
  .text.setMinDownLimit
-                0x00000000000003fe       0x2e main.o
-                0x00000000000003fe                setMinDownLimit
+                0x00000000000003ec       0x2e main.o
+                0x00000000000003ec                setMinDownLimit
  .text.redLightOn
-                0x000000000000042c        0x4 main.o
-                0x000000000000042c                redLightOn
+                0x000000000000041a        0x4 main.o
+                0x000000000000041a                redLightOn
  .text.greenLightOn
-                0x0000000000000430        0x4 main.o
-                0x0000000000000430                greenLightOn
+                0x000000000000041e        0x4 main.o
+                0x000000000000041e                greenLightOn
  .text.getCurrentDistance
-                0x0000000000000434        0xc main.o
-                0x0000000000000434                getCurrentDistance
+                0x0000000000000422        0xc main.o
+                0x0000000000000422                getCurrentDistance
  .text.startup.main
-                0x0000000000000440      0x110 main.o
-                0x0000000000000440                main
+                0x000000000000042e      0x110 main.o
+                0x000000000000042e                main
  .text.__vector_2
-                0x0000000000000550       0x42 main.o
-                0x0000000000000550                __vector_2
+                0x000000000000053e       0x42 main.o
+                0x000000000000053e                __vector_2
  .text.__vector_18
-                0x0000000000000592      0x152 main.o
-                0x0000000000000592                __vector_18
- .text.libgcc   0x00000000000006e4        0xc /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
-                0x00000000000006e4                __tablejump2__
-                0x00000000000006f0                . = ALIGN (0x2)
+                0x0000000000000580      0x152 main.o
+                0x0000000000000580                __vector_18
+ .text.libgcc   0x00000000000006d2        0xc /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+                0x00000000000006d2                __tablejump2__
+                0x00000000000006de                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000006f0        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
-                0x00000000000006f0                exit
-                0x00000000000006f0                _exit
+ .fini9         0x00000000000006de        0x0 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+                0x00000000000006de                exit
+                0x00000000000006de                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -431,11 +431,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000006f0        0x4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000006de        0x4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000006f4                _etext = .
+                0x00000000000006e2                _etext = .
 
-.data           0x0000000000800100        0x8 load address 0x00000000000006f4
+.data           0x0000000000800100        0x8 load address 0x00000000000006e2
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -481,8 +481,8 @@ END GROUP
                 0x0000000000800130                _gv_counter
                 0x0000000000800132                adc_value
                 0x0000000000800134                PROVIDE (__bss_end, .)
-                0x00000000000006f4                __data_load_start = LOADADDR (.data)
-                0x00000000000006fc                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000000000006e2                __data_load_start = LOADADDR (.data)
+                0x00000000000006ea                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800134        0x0
                 0x0000000000800134                PROVIDE (__noinit_start, .)
@@ -507,23 +507,23 @@ END GROUP
 .signature
  *(.signature*)
 
-.stab           0x0000000000000000     0x1f44
+.stab           0x0000000000000000     0x1f98
  *(.stab)
  .stab          0x0000000000000000      0x864 AVR_TTC_scheduler.o
- .stab          0x0000000000000864     0x144c main.o
-                                       0x189c (size before relaxing)
- .stab          0x0000000000001cb0       0x6c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
+ .stab          0x0000000000000864     0x14a0 main.o
+                                       0x18f0 (size before relaxing)
+ .stab          0x0000000000001d04       0x6c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_exit.o)
                                          0x78 (size before relaxing)
- .stab          0x0000000000001d1c       0x9c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
+ .stab          0x0000000000001d70       0x9c /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_tablejump2.o)
                                          0xa8 (size before relaxing)
- .stab          0x0000000000001db8       0xd8 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
+ .stab          0x0000000000001e0c       0xd8 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_copy_data.o)
                                          0xe4 (size before relaxing)
- .stab          0x0000000000001e90       0xb4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
+ .stab          0x0000000000001ee4       0xb4 /usr/local/Cellar/avr-gcc/6.2.0/lib/gcc/avr/6.2.0/avr5/libgcc.a(_clear_bss.o)
                                          0xc0 (size before relaxing)
 
-.stabstr        0x0000000000000000     0x15f0
+.stabstr        0x0000000000000000     0x1609
  *(.stabstr)
- .stabstr       0x0000000000000000     0x15f0 AVR_TTC_scheduler.o
+ .stabstr       0x0000000000000000     0x1609 AVR_TTC_scheduler.o
 
 .stab.excl
  *(.stab.excl)

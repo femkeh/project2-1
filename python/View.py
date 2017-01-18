@@ -19,10 +19,10 @@ class View():
 		for i in range(7):
 			x = 450 + (i * 80) #offset vanaf linker scherm rand = 450 + voor elke stap ix80 verderop een lijn
 			self.canvas.create_line(x,300,x,50, width=1, dash=(2,5)) 
-			self.canvas.create_text(x,300, text='%d'% (10*(i-6)), anchor=N) 
+			self.canvas.create_text(x,300, text='%d'% (10*(i-6)*-1), anchor=N) 
 		self.canvas.create_text(x-50,320, text='Time in seconds', font = "Helvetica 16 bold", anchor=N) 
 
-		# y-axis lux
+		# y-axis lichtintensiteit
 		for i in range(6):
 			y = 300 - (i * 50)
 			self.canvas.create_line(450,y,930,y, width=1, dash=(2,5))

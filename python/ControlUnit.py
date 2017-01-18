@@ -88,35 +88,48 @@ class ControlUnit:
 
 
 	def setLightLimit(self, value):
-		value1 = 0
-		value2 = 0
-		if (int(value) - 256) < 0:
-			value1 = 0
-			value2 = int(value)
+		valueConverted = int(value) 
+		highByte = 0
+		lowByte = 0
+		if (valueConverted > 256):
+			highByte = valueConverted // 256
+			lowByte = valueConverted - (highByte * 256)
 		else:
-			value1 = 1
-			value2 = int(value) - 256
+			highByte = 0
+			lowByte = valueConverted
+		# 	value1 = 0
+		# 	value2 = int(value)
+		# else:
+		# 	value1 = 1
+		# 	value2 = int(value) - 256
 
 		self.ser.write([42])
-		self.ser.write([value1])
-		self.ser.write([value2])
+		self.ser.write([highByte])
+		self.ser.write([lowByte])
 		responseId = self.read_byte()
 		if (responseId < 11 or responseId > 20):
 			return False
 
 	def setRolldownLimit(self, value):
-		value1 = 0
-		value2 = 0
-		if (int(value) - 256) < 0:
-			value1 = 0
-			value2 = int(value)
+		valueConverted = int(value) 
+		highByte = 0
+		lowByte = 0
+		if (valueConverted > 256):
+			highByte = valueConverted // 256
+			lowByte = valueConverted - (highByte * 256)
 		else:
-			value1 = 1
-			value2 = int(value) - 256
+			highByte = 0
+			lowByte = valueConverted
+		# if (int(value) - 256) < 0:
+		# 	value1 = 0
+		# 	value2 = int(value)
+		# else:
+		# 	value1 = 1
+		# 	value2 = int(value) - 256
 
 		self.ser.write([43])
-		self.ser.write([value1])
-		self.ser.write([value2])
+		self.ser.write([highByte])
+		self.ser.write([lowByte])
 		responseId = self.read_byte()
 		if (responseId < 11 or responseId > 20):
 			return False
