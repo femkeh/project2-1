@@ -14,7 +14,7 @@ class SideController():
 		###--- drawButtonsSide ---###
 
 		nameModule = self.naam
-		self.canvas.create_text(53,10, text='Name: %s'% nameModule, font = "Helvetica 14 bold", anchor=N)
+		self.canvas.create_text(58,10, text='Module: %s'% nameModule, font = "Helvetica 14 bold", anchor=N)
 
 		self.canvas.create_text(53,270, text='Manual:', anchor=N)
 
