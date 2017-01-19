@@ -99,7 +99,7 @@ void init_ext_int(void)
 }
 
 uint16_t getAdcValue(uint8_t channel) {
-    // Returns 8 bit
+    // Getting input from the analogue ports
         uint16_t adcVal = 0;
         ADMUX &= ~((1<<MUX3)|(1<<MUX2)|(1<<MUX1)|(1<<MUX0)); // Clear ADC Mux Bits
             ADMUX |= channel;                             // setup ADC Channel 1
