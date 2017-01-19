@@ -117,7 +117,7 @@ protocol = {
     },
     50: {
         "title": "Roll screen up/down",
-        "label": "setScreenUp",
+        "label": "blinkYellowLed",
         "sendMoreData": 0
     }
 }
