@@ -29,8 +29,8 @@ class BottomController():
 		self.labelLight = Label(self.canvas, text="Light limit:")
 		self.labelLight_window = self.canvas.create_window(60, 400, window=self.labelLight)
 			#Output
-		self.textLight = Label(self.canvas, text=str(self.lightLimitValue) + " Lichtint.")
-		self.textLight_window = self.canvas.create_window(132, 428, window=self.textLight)
+		self.textLight = Label(self.canvas, text=str(self.lightLimitValue) + " lichtint.")
+		self.textLight_window = self.canvas.create_window(139, 428, window=self.textLight)
 
 		# Temperature limit
 			#Entry
@@ -45,7 +45,7 @@ class BottomController():
 		self.labelTemp_window = self.canvas.create_window(380, 400, window=self.labelTemp)
 			#Output
 		self.textTemp = Label(self.canvas, text=str(self.temperatureLimitValue) + " °C")
-		self.textTemp_window = self.canvas.create_window(457, 428, window=self.textTemp)
+		self.textTemp_window = self.canvas.create_window(463, 428, window=self.textTemp)
 
 		# Window limit
 			#Entry
@@ -60,30 +60,30 @@ class BottomController():
 		self.labelWindow_window = self.canvas.create_window(705, 400, window=self.labelWindow)
 			#Output
 		self.textWindow = Label(self.canvas, text=str(self.windowHeightValue) + " cm")
-		self.textWindow_window = self.canvas.create_window(778, 428, window=self.textWindow)
+		self.textWindow_window = self.canvas.create_window(782, 428, window=self.textWindow)
 
 		# General
-		self.canvas.create_text(58,420, text='Current value:', font = "Helvetica 10 bold", anchor=N)
+		self.canvas.create_text(49,421, text='Current value:', anchor=N)
 
 	def setLimitLight(self):
-		if len(self.lightEntry.get()) > 0 and int(self.lightEntry.get()) > 0 and int(self.lightEntry.get()) < 100000:
+		if len(self.lightEntry.get()) > 0 and int(self.lightEntry.get()) > 0 and int(self.lightEntry.get()) < 1001:
 
 			self.lightLimitValue = int(self.lightEntry.get())
 			try:
 				#self.lightLimitValue = self.lightEntry.get()
 				self.unit.setLightLimit(self.lightEntry.get())
-				self.lightLimitValue = str(self.unit.getLightLimit()) + " Lichtint."
+				self.lightLimitValue = str(self.unit.getLightLimit()) + " lichtint."
 				self.lightEntry.delete(0,END)
 				self.textLight.destroy()
 				self.textLight = Label(self.canvas, text=self.lightLimitValue)
-				self.textLight_window = self.canvas.create_window(132, 428, window=self.textLight)
+				self.textLight_window = self.canvas.create_window(139, 428, window=self.textLight)
 
 			except ValueError:
 				pass
 		else:
 			messagebox.showwarning("INVALID ENTRY!","This is not a valid entry, please try again.")
 	def setLimitTemp(self):
-		if len(self.temperatureEntry.get()) > 0 and int(self.temperatureEntry.get()) > -40 and int(self.temperatureEntry.get()) < 59 :
+		if len(self.temperatureEntry.get()) > 0 and int(self.temperatureEntry.get()) > -40 and int(self.temperatureEntry.get()) < 61 :
 			self.temperatureLimitValue = int(self.temperatureEntry.get())
 			try:
 				#self.temperatureLimitValue = self.temperatureEntry.get()
@@ -92,14 +92,14 @@ class BottomController():
 				self.temperatureEntry.delete(0,END)
 				self.textTemp.destroy()
 				self.textTemp = Label(self.canvas, text=self.temperatureLimitValue)
-				self.textTemp_window = self.canvas.create_window(457, 428, window=self.textTemp)
+				self.textTemp_window = self.canvas.create_window(463, 428, window=self.textTemp)
 
 			except ValueError:
 				pass
 		else:
 			messagebox.showwarning("INVALID ENTRY!", "This is not a valid entry, please try again. The minimum temperature is 0°C and the maximum is 58°C.")
 	def setLimitWindow(self):
-		if len(self.windowEntry.get()) > 0 and int(self.windowEntry.get()) > 0.5 and int(self.windowEntry.get()) < 256:
+		if len(self.windowEntry.get()) > 0 and int(self.windowEntry.get()) > 5 and int(self.windowEntry.get()) < 256:
 			self.temperatureLimitValue = int(self.windowEntry.get())
 			try:
 				#self.windowLimitValue = self.windowEntry.get()
@@ -108,7 +108,7 @@ class BottomController():
 				self.windowEntry.delete(0,END)
 				self.textWindow.destroy()
 				self.textWindow = Label(self.canvas, text=self.windowHeightValue)
-				self.textWindow_window = self.canvas.create_window(773, 428, window=self.textWindow)
+				self.textWindow_window = self.canvas.create_window(782, 428, window=self.textWindow)
 
 			except ValueError:
 				pass

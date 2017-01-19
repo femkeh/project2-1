@@ -30,12 +30,12 @@ class PlotLight():
 		# if step boundary reached; start from beginning of drawing plot
 		if self.s == self._PLOT_STEP_BOUNDARY:
 			self.s = 1
-			self.x2 = 930
+			self.x2 = 450
 			self.canvas.delete('temp-light') # delete items tagged as temp-light
 
 		x1 = self.x2
 		y1 = self.y2
-		self.x2 = 930 - self.s * 8
+		self.x2 = 450 + self.s * 8
 		self.y2 = (((self.unit.getLight() * -1) / 200) * 50) + 300
 		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='red', tags='temp-light', width=2)
 		self.s = self.s + 1

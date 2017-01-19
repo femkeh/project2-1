@@ -30,13 +30,13 @@ class PlotTemp():
 		# if step boundary reached; start from beginning of drawing plot
 		if self.s == self._PLOT_STEP_BOUNDARY:
 			self.s = 1
-			self.x2 = 930
+			self.x2 = 450
 			self.canvas.delete('temp-temp') # delete items tagged as temp-temp, old temp line
 			
 
 		x1 = self.x2
 		y1 = self.y2
-		self.x2 = 930 - self.s * 8
+		self.x2 = 450 + self.s * 8
 		self.y2 = (((self.unit.getTemp() * -1) / 20) * 50) + 200
 		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='blue', tags='temp-temp', width=2)
 		self.s = self.s + 1

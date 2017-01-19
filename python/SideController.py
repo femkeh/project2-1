@@ -14,9 +14,9 @@ class SideController():
 		###--- drawButtonsSide ---###
 
 		nameModule = self.naam
-		self.canvas.create_text(52,10, text='Name: %s'% nameModule, font = "Helvetica 10 bold", anchor=N)
+		self.canvas.create_text(53,10, text='Name: %s'% nameModule, font = "Helvetica 14 bold", anchor=N)
 
-		self.canvas.create_text(60,270, text='Manual:', anchor=N)
+		self.canvas.create_text(53,270, text='Manual:', anchor=N)
 
 		self.buttonOn = Button(self.canvas, text = "On", state=NORMAL, command = self.manualOn) #Nog iets met dat die geselecteerd is, 'aan' staat
 		self.buttonOn.configure(width = 7) # activebackground = "#33B5E5",

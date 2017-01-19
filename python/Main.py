@@ -7,7 +7,7 @@ import time
 
 # Main
 window = Tk()
-window.wm_title("Rolluiksysteem                                                                                                                             Yumthy ©")
+window.wm_title("Rolluiksysteem                                                                                                                                   Yumthy ©")
 rootcanvas = Canvas(window, borderwidth=0, width=1000, height=450)
 rootframe = Frame(rootcanvas, background="#ffffff")
 verticalScrollbar = Scrollbar(window, orient="vertical", command=rootcanvas.yview)
@@ -35,9 +35,9 @@ def insertModule():
 
 buttonConnection = Button(rootcanvas, text = "Connect", state=NORMAL, command = insertModule) #Nog iets met dat die geselecteerd is, 'aan' staat
 buttonConnection.configure(width = 10) # activebackground = "#33B5E5",
-buttonConnection_window = rootcanvas.create_window(720, 12, window=buttonConnection) # anchor=NW,
+buttonConnection_window = rootcanvas.create_window(738, 15, window=buttonConnection) # anchor=NW,
 connectEntry = Entry(rootcanvas, width=7) #textvariable=self.light_limit
-connectEntry_window = rootcanvas.create_window(650, 12, window=connectEntry)
+connectEntry_window = rootcanvas.create_window(650, 16, window=connectEntry)
 connectEntry.insert(10, "COM..")
 
 

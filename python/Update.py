@@ -34,8 +34,8 @@ class Update():
 		if statusValue == 0:
 			status = "Rolled down"
 		else:
-			status = "Rolled up"
-		self.canvas.create_text(85,25, text='Status: %s'% status, font = "Helvetica 10 bold", anchor=N, tag='temp-status')
+			status = "Rolled up     "
+		self.canvas.create_text(90,25, text='Status: %s'% status, font = "Helvetica 14 bold", anchor=N, tag='temp-status')
 
 		temp = str(round(self.unit.getTemp())) + " °C"
 		self.canvas.create_text(170,120, text=' %s'% temp, font = "Helvetica 95 bold", anchor=N, tag='temp-status')
