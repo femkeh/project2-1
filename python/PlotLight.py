@@ -37,8 +37,13 @@ class PlotLight():
 		y1 = self.y2
 		self.x2 = 930 - self.s * 8
 		self.y2 = (((self.unit.getLight() * -1) / 200) * 50) + 300
-		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='red', tags='temp-light')
+		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='red', tags='temp-light', width=2)
 		self.s = self.s + 1
+
+		# create temp limit line
+		self.canvas.delete('light-limit') # delete items tagged as temp-temp, old temp limit line
+		yTempLimit = (((self.unit.getLightLimit() * -1) / 200) * 50) + 300
+		self.canvas.create_line(450,yTempLimit,930,yTempLimit, fill='red', tags ='light-limit') # x-axis
 
 	def keepPlotting(self):
 		self.plotOneStep()

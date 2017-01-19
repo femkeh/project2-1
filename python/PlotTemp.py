@@ -31,14 +31,20 @@ class PlotTemp():
 		if self.s == self._PLOT_STEP_BOUNDARY:
 			self.s = 1
 			self.x2 = 930
-			self.canvas.delete('temp-temp') # delete items tagged as temp-temp
+			self.canvas.delete('temp-temp') # delete items tagged as temp-temp, old temp line
+			
 
 		x1 = self.x2
 		y1 = self.y2
 		self.x2 = 930 - self.s * 8
 		self.y2 = (((self.unit.getTemp() * -1) / 20) * 50) + 200
-		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='blue', tags='temp-temp')
+		self.canvas.create_line(x1, y1, self.x2, self.y2, fill='blue', tags='temp-temp', width=2)
 		self.s = self.s + 1
+
+		# create temp limit line
+		self.canvas.delete('temp-limit') # delete items tagged as temp-temp, old temp limit line
+		yTempLimit = (((self.unit.getTempLimit() * -1) / 20) * 50) + 200
+		self.canvas.create_line(450,yTempLimit,930,yTempLimit, fill='blue', tags ='temp-limit') # x-axis
 
 	def keepPlotting(self):
 		self.plotOneStep()
